@@ -1,10 +1,16 @@
 extends Node2D
 
+const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
+
 var x:int
 var y:int
 
 # type (as a string) => instance
 var _components = {}
+
+func _init(x, y):
+	self.x = x
+	self.y = y
 
 func has(type:String):
 	return self._components.has(type)
@@ -22,3 +28,7 @@ func remove(type:String):
 		component.parent = null
 		self._components.erase(type)
 	
+############ extensions
+func sprite(image:String, layer:String):
+	self._components["SpriteComponent"] = SpriteComponent.new(image, layer)
+	return self
