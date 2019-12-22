@@ -1,8 +1,12 @@
 extends Node2D
 
 const DisplaySystem = preload("res://Scripts/Ecs/Systems/DisplaySystem.gd")
+const PlayerMovementSystem = preload("res://Scripts/Ecs/Systems/PlayerMovementSystem.gd")
+
 const Entity = preload("res://Scripts/Ecs/Core/Entity.gd")
+
 const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
+const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
 
 const TILES_WIDE = 30
 const TILES_HIGH = 17
@@ -30,6 +34,7 @@ func _process(delta):
 
 func _setup_systems():
 	_systems.append(DisplaySystem.new($Ground, $Creatures))
+	_systems.append(PlayerMovementSystem.new())
 
 func _create_hardcoded_dungeon():
 	for x in range(TILES_WIDE):
@@ -41,4 +46,7 @@ func _create_hardcoded_dungeon():
 		self.add_entity(Entity.new(TILES_WIDE - 1, y).sprite("Wall", "Ground"))
 
 func _spawn_player():
-	self.add_entity(Entity.new(15, 9).sprite("Player", "Creatures"))
+	self.add_entity(Entity.new(15, 9)\
+					.sprite("Player", "Creatures")\
+					.add("PlayerMovementComponent", PlayerMovementComponent.new())
+					)

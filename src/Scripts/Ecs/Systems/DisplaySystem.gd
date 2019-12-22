@@ -15,10 +15,10 @@ func _init(tiles_tilemap:TileMap, entities_tilemap:TileMap):
 		"Creatures": _entities_tilemap
 	}
 
+func on_update():
 	_tiles_tilemap.clear()
 	_entities_tilemap.clear()
-
-func on_update():
+	
 	for entity in self.entities:
 		var component = entity.get("SpriteComponent")
 
