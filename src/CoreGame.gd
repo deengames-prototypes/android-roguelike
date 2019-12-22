@@ -26,12 +26,18 @@ func update_systems():
 ###################################
 
 func _ready():
+	_setup_tilemaps()
 	_setup_systems()
 	_create_hardcoded_dungeon()
 	_spawn_player()
 
 func _process(delta):
 	self.update_systems()
+
+func _setup_tilemaps():
+	var cell_size = Vector2(Constants.TILE_WIDTH, Constants.TILE_HEIGHT)
+	$Ground.cell_size = cell_size
+	$Creatures.cell_size = cell_size
 
 func _setup_systems():
 	_systems.append(DisplaySystem.new($Ground, $Creatures))
