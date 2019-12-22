@@ -34,9 +34,7 @@ func _process(delta):
 func _setup_systems():
 	_systems.append(DisplaySystem.new($Ground, $Creatures))
 	_systems.append(PlayerMovementSystem.new(_event_bus))
-	var ems = EntityMovementSystem.new()
-	_systems.append(ems)
-	_event_bus.connect('move_entity', ems, 'on_move_entity')
+	_systems.append(EntityMovementSystem.new(_event_bus))
 	
 
 func _create_hardcoded_dungeon():
