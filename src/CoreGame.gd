@@ -2,18 +2,17 @@ extends Node2D
 
 const DisplaySystem = preload("res://Scripts/Ecs/Systems/DisplaySystem.gd")
 const PlayerMovementSystem = preload("res://Scripts/Ecs/Systems/PlayerMovementSystem.gd")
+const EntityMovementSystem = preload("res://Scripts/Ecs/Systems/EntityMovementSystem.gd")
 
 const Entity = preload("res://Scripts/Ecs/Core/Entity.gd")
 
 const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
 const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
 
-const TILES_WIDE = 30
-const TILES_HIGH = 17
-
 ###################################
 # TODO: put into a container/thing
 var _systems:Array = []
+onready var _event_bus = preload("res://Scripts/EventBus.gd").new()
 # Also TODO: put in with _systems
 func add_entity(e:Entity):
 	for system in _systems:
@@ -34,16 +33,20 @@ func _process(delta):
 
 func _setup_systems():
 	_systems.append(DisplaySystem.new($Ground, $Creatures))
-	_systems.append(PlayerMovementSystem.new())
+	_systems.append(PlayerMovementSystem.new(_event_bus))
+	var ems = EntityMovementSystem.new()
+	_systems.append(ems)
+	_event_bus.connect('move_entity', ems, 'on_move_entity')
+	
 
 func _create_hardcoded_dungeon():
-	for x in range(TILES_WIDE):
+	for x in range(Constants.TILES_WIDE):
 		self.add_entity(Entity.new(x, 0).sprite("Wall", "Ground"))
-		self.add_entity(Entity.new(x, TILES_HIGH - 1).sprite("Wall", "Ground"))
+		self.add_entity(Entity.new(x, Constants.TILES_HIGH - 1).sprite("Wall", "Ground"))
 	
-	for y in range(TILES_HIGH):
+	for y in range(Constants.TILES_HIGH):
 		self.add_entity(Entity.new(0, y).sprite("Wall", "Ground"))
-		self.add_entity(Entity.new(TILES_WIDE - 1, y).sprite("Wall", "Ground"))
+		self.add_entity(Entity.new(Constants.TILES_WIDE - 1, y).sprite("Wall", "Ground"))
 
 func _spawn_player():
 	self.add_entity(Entity.new(15, 9)\

@@ -13,3 +13,6 @@ func add(e:Entity):
 			return
 		
 	entities.append(e)
+
+func on_update():
+	pass
