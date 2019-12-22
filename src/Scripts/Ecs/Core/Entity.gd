@@ -30,5 +30,5 @@ func remove(type:String):
 	
 ############ extensions
 func sprite(image:String, layer:String):
-	self._components["SpriteComponent"] = SpriteComponent.new(image, layer)
+	add("SpriteComponent", SpriteComponent.new(image, layer))
 	return self
