@@ -20,5 +20,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 524303, 0, 0 )
 
-[node name="DPad" parent="." instance=ExtResource( 4 )]
-position = Vector2( 123.643, 170.573 )
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DPad" parent="UI" instance=ExtResource( 4 )]
+position = Vector2( 77.5626, 303.602 )
