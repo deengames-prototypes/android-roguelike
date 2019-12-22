@@ -21,6 +21,7 @@ func get(type:String):
 func add(type:String, component):
 	self._components[type] = component
 	component.parent = self
+	return self
 
 func remove(type:String):
 	if self._components.has(type):
@@ -30,5 +31,4 @@ func remove(type:String):
 	
 ############ extensions
 func sprite(image:String, layer:String):
-	add("SpriteComponent", SpriteComponent.new(image, layer))
-	return self
+	return add("SpriteComponent", SpriteComponent.new(image, layer))
