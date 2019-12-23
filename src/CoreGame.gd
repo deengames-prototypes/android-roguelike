@@ -3,11 +3,13 @@ extends Node2D
 const DisplaySystem = preload("res://Scripts/Ecs/Systems/DisplaySystem.gd")
 const PlayerMovementSystem = preload("res://Scripts/Ecs/Systems/PlayerMovementSystem.gd")
 const EntityMovementSystem = preload("res://Scripts/Ecs/Systems/EntityMovementSystem.gd")
+const CameraSystem = preload("res://Scripts/Ecs/Systems/CameraSystem.gd")
 
 const Entity = preload("res://Scripts/Ecs/Core/Entity.gd")
 
 const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
 const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
+const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
 
 ###################################
 # TODO: put into a container/thing
@@ -24,6 +26,7 @@ func update_systems():
 ###################################
 
 func _ready():
+	_setup_tilemaps()
 	_setup_systems()
 	_create_hardcoded_dungeon()
 	_spawn_player()
@@ -31,13 +34,16 @@ func _ready():
 func _process(delta):
 	self.update_systems()
 
+func _setup_tilemaps():
+	var cell_size = Vector2(Constants.TILE_WIDTH, Constants.TILE_HEIGHT)
+	$Ground.cell_size = cell_size
+	$Creatures.cell_size = cell_size
+
 func _setup_systems():
 	_systems.append(DisplaySystem.new($Ground, $Creatures))
 	_systems.append(PlayerMovementSystem.new(_event_bus))
-	var ems = EntityMovementSystem.new()
-	_systems.append(ems)
-	_event_bus.connect('move_entity', ems, 'on_move_entity')
-	
+	_systems.append(EntityMovementSystem.new(_event_bus))
+	_systems.append(CameraSystem.new($Camera2D))
 
 func _create_hardcoded_dungeon():
 	for x in range(Constants.TILES_WIDE):
@@ -51,5 +57,6 @@ func _create_hardcoded_dungeon():
 func _spawn_player():
 	self.add_entity(Entity.new(15, 9)\
 					.sprite("Player", "Creatures")\
-					.add("PlayerMovementComponent", PlayerMovementComponent.new())
+					.add("PlayerMovementComponent", PlayerMovementComponent.new())\
+					.add("CameraFollowComponent", CameraFollowComponent.new())
 					)
