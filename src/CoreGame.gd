@@ -11,6 +11,8 @@ const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd
 const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
 const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
 
+var DungeonGenerator = preload("res://Scripts/DungeonGenerator.gd").new()
+
 ###################################
 # TODO: put into a container/thing
 var _systems:Array = []
@@ -28,7 +30,7 @@ func update_systems():
 func _ready():
 	_setup_tilemaps()
 	_setup_systems()
-	_create_hardcoded_dungeon()
+	_create_dungeon()
 	_spawn_player()
 
 func _process(delta):
@@ -45,14 +47,15 @@ func _setup_systems():
 	_systems.append(EntityMovementSystem.new(_event_bus))
 	_systems.append(CameraSystem.new($Camera2D))
 
-func _create_hardcoded_dungeon():
+func _create_dungeon():
+	DungeonGenerator.generate_dungeon($Ground)
+	_spawn_entities()
+
+func _spawn_entities():
 	for x in range(Constants.TILES_WIDE):
-		self.add_entity(Entity.new(x, 0).sprite("Wall", "Ground"))
-		self.add_entity(Entity.new(x, Constants.TILES_HIGH - 1).sprite("Wall", "Ground"))
-	
-	for y in range(Constants.TILES_HIGH):
-		self.add_entity(Entity.new(0, y).sprite("Wall", "Ground"))
-		self.add_entity(Entity.new(Constants.TILES_WIDE - 1, y).sprite("Wall", "Ground"))
+		for y in range(Constants.TILES_HIGH):
+			if $Ground.get_cell(x, y) == 0:
+				self.add_entity(Entity.new(x, y).sprite("Wall", "Ground"))
 
 func _spawn_player():
 	self.add_entity(Entity.new(15, 9)\
