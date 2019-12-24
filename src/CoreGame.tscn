@@ -26,7 +26,6 @@ tile_data = PoolIntArray( 524303, 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="SystemGroup"]
 current = true
-zoom = Vector2( 3, 3 )
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 5 )
