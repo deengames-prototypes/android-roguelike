@@ -6,6 +6,7 @@ const Entity = preload("res://Scripts/Ecs/Core/Entity.gd")
 
 const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
 const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
+const HealthComponent = preload("res://Scripts/Ecs/Components/HealthComponent.gd")
 
 var wall_index = 0
 var empty_index = -1
@@ -37,5 +38,6 @@ func spawn_player(event_bus):
 	event_bus.emit_signal("spawn_entity", Entity.new(15, 9)\
 					.sprite("Player", "Creatures")\
 					.add("PlayerMovementComponent", PlayerMovementComponent.new())\
-					.add("CameraFollowComponent", CameraFollowComponent.new())
+					.add("CameraFollowComponent", CameraFollowComponent.new())\
+					.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
 					)
