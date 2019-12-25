@@ -7,6 +7,7 @@ const Entity = preload("res://Scripts/Ecs/Core/Entity.gd")
 const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
 const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
 const HealthComponent = preload("res://Scripts/Ecs/Components/HealthComponent.gd")
+const AttackComponent = preload("res://Scripts/Ecs/Components/AttackComponent.gd")
 
 var wall_index = 0
 var empty_index = -1
@@ -47,6 +48,7 @@ func spawn_player(empty_tiles, event_bus):
 					.sprite("Player", "Creatures")\
 					.add("PlayerMovementComponent", PlayerMovementComponent.new())\
 					.add("CameraFollowComponent", CameraFollowComponent.new())\
+					.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
 					.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
 					)
 
@@ -55,5 +57,6 @@ func spawn_enemies(empty_tiles, event_bus):
 		var tile = get_random_empty_tile(empty_tiles)
 		event_bus.emit_signal("spawn_entity", Entity.new(tile.x, tile.y)\
 						.sprite("Enemy", "Creatures")\
+						.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
 						.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
 						)
