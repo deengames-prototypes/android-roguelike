@@ -4,20 +4,19 @@ var _max_x
 var _max_y
 var _history = []
 
-var rng = RandomNumberGenerator.new()
+var _rng
 
-func _init(max_x, max_y):
+func _init(max_x, max_y, rng):
 	_max_x = max_x
 	_max_y = max_y
-	
-	rng.randomize()
-	
-	position.x = rng.randi_range(0, _max_x)
-	position.y = rng.randi_range(0, _max_y)
+	_rng = rng
+
+	position.x = _rng.randi_range(0, _max_x)
+	position.y = _rng.randi_range(0, _max_y)
 
 func walk():
 	var mod = Vector2()
-	if rng.randf() < 0.5:
+	if _rng.randf() < 0.5:
 		mod.y = 1 * rand_sign()
 	else:
 		mod.x = 1 * rand_sign()
@@ -29,7 +28,7 @@ func walk():
 		_history.append(position)
 
 func rand_sign():
-	if rng.randf() < 0.5:
+	if _rng.randf() < 0.5:
 		return 1
 	else:
 		return -1
