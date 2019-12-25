@@ -2,6 +2,7 @@ extends Node2D
 
 var _max_x
 var _max_y
+var _history = []
 
 var rng = RandomNumberGenerator.new()
 
@@ -25,6 +26,7 @@ func walk():
 		walk()
 	else:
 		position += mod
+		_history.append(position)
 
 func rand_sign():
 	if rng.randf() < 0.5:
@@ -34,3 +36,6 @@ func rand_sign():
 
 func is_out_of_bounds(pos):
 	return pos.x > _max_x or pos.x < 0 or pos.y > _max_y or pos.y < 0
+
+func get_history():
+	return _history

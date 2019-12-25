@@ -20,22 +20,27 @@ func generate_dungeon(tilemap: TileMap, event_bus):
 		random_walker.walk()
 		tilemap.set_cell(random_walker.position.x, random_walker.position.y, empty_index)
 	
-	spawn_entities(tilemap, event_bus)
-	spawn_player(event_bus)
+
+	spawn_walls(tilemap, event_bus)
+	spawn_player(random_walker.get_history(), event_bus)
 
 func flood_with_walls(tilemap, wall_index):
 	for x in range(Constants.TILES_WIDE):
 		for y in range(Constants.TILES_HIGH):
 			tilemap.set_cell(x, y, wall_index)
 
-func spawn_entities(tilemap, event_bus):
+func get_random_empty_tile(empty_tiles):
+	return empty_tiles[int(randf() * len(empty_tiles))]
+
+func spawn_walls(tilemap, event_bus):
 	for x in range(Constants.TILES_WIDE):
 		for y in range(Constants.TILES_HIGH):
 			if tilemap.get_cell(x, y) == 0:
 				event_bus.emit_signal("spawn_entity", Entity.new(x, y).sprite("Wall", "Ground"))
 
-func spawn_player(event_bus):
-	event_bus.emit_signal("spawn_entity", Entity.new(15, 9)\
+func spawn_player(empty_tiles, event_bus):
+	var tile = get_random_empty_tile(empty_tiles)
+	event_bus.emit_signal("spawn_entity", Entity.new(tile.x, tile.y)\
 					.sprite("Player", "Creatures")\
 					.add("PlayerMovementComponent", PlayerMovementComponent.new())\
 					.add("CameraFollowComponent", CameraFollowComponent.new())\
