@@ -2,15 +2,12 @@ extends Node2D
 
 const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
 
-var x:int
-var y:int
-
 # type (as a string) => instance
 var _components = {}
 
-func _init(_x, _y):
-	x = _x
-	y = _y
+func _init(x, y):
+	position.x = x
+	position.y = y
 
 func has(type:String):
 	return self._components.has(type)

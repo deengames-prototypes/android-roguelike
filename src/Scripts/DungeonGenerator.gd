@@ -8,6 +8,7 @@ const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMove
 const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
 const HealthComponent = preload("res://Scripts/Ecs/Components/HealthComponent.gd")
 const AttackComponent = preload("res://Scripts/Ecs/Components/AttackComponent.gd")
+const ChasePlayerComponent = preload("res://Scripts/Ecs/Components/ChasePlayerComponent.gd")
 
 var wall_index = 0
 var empty_index = -1
@@ -58,5 +59,6 @@ func spawn_enemies(empty_tiles, event_bus):
 		event_bus.emit_signal("spawn_entity", Entity.new(tile.x, tile.y)\
 						.sprite("Enemy", "Creatures")\
 						.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
-						.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
+						.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))\
+						.add("ChasePlayerComponent", ChasePlayerComponent.new())
 						)

@@ -5,11 +5,11 @@ func _init(event_bus):
 
 func on_move_entity(entity, x, y):
 	if is_empty(x, y):
-		entity.x = clamp(x, 0, Constants.TILES_WIDE - 1)
-		entity.y = clamp(y, 0, Constants.TILES_HIGH - 1)
+		entity.position.x = clamp(x, 0, Constants.TILES_WIDE - 1)
+		entity.position.y = clamp(y, 0, Constants.TILES_HIGH - 1)
 
 func is_empty(x, y):
 	for e in entities:
-		if e.x == x and e.y == y:
+		if e.position.x == x and e.position.y == y:
 			return false
 	return true

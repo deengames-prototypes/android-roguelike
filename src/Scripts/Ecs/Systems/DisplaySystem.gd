@@ -24,4 +24,4 @@ func on_update():
 
 		var tilemap = tilemaps_by_name[component.layer]
 		var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
-		tilemap.set_cell(entity.x, entity.y, tile_index)
+		tilemap.set_cell(entity.position.x, entity.position.y, tile_index)

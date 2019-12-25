@@ -26,6 +26,6 @@ func on_move_entity(attacker, x, y):
 
 func get_attackable_entity(x, y):
 	for e in entities:
-		if e.x == x and e.y == y:
+		if e.position.x == x and e.position.y == y:
 			return e
 	return null

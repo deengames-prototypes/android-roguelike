@@ -5,6 +5,7 @@ const PlayerMovementSystem = preload("res://Scripts/Ecs/Systems/PlayerMovementSy
 const EntityMovementSystem = preload("res://Scripts/Ecs/Systems/EntityMovementSystem.gd")
 const CameraSystem = preload("res://Scripts/Ecs/Systems/CameraSystem.gd")
 const CombatSystem = preload("res://Scripts/Ecs/Systems/CombatSystem.gd")
+const ChasePlayerSystem = preload("res://Scripts/Ecs/Systems/ChasePlayerSystem.gd")
 
 var _ground_tilemap:TileMap
 var _creatures_tilemap:TileMap
@@ -29,9 +30,6 @@ func update_systems():
 	for system in _systems:
 		system.on_update()
 
-func get_ground():
-	return _ground_tilemap
-		
 func _setup(event_bus):
 	_setup_tilemaps()
 	_setup_systems(event_bus)
@@ -49,3 +47,4 @@ func _setup_systems(event_bus):
 	_systems.append(EntityMovementSystem.new(event_bus))
 	_systems.append(CameraSystem.new(_camera))
 	_systems.append(CombatSystem.new(event_bus))
+	_systems.append(ChasePlayerSystem.new(event_bus))
