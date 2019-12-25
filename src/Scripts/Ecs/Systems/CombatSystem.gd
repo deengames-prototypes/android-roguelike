@@ -20,7 +20,7 @@ func on_move_entity(attacker, x, y):
 	
 	health_component.health -= attack_component.damage
 	print("entity attacked")
-	if health_component.health < 0:
+	if health_component.health <= 0:
 		print("entity killed")
 		_event_bus.emit_signal("entity_died", attacked)
 
