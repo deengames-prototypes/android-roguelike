@@ -8,9 +8,9 @@ var y:int
 # type (as a string) => instance
 var _components = {}
 
-func _init(x, y):
-	self.x = x
-	self.y = y
+func _init(_x, _y):
+	x = _x
+	y = _y
 
 func has(type:String):
 	return self._components.has(type)
