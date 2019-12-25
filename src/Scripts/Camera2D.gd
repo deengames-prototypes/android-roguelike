@@ -7,4 +7,4 @@ func _ready():
 	limit_bottom = Constants.TILES_HIGH * Constants.TILE_HEIGHT
 
 func center_on(entity):
-	global_position = Vector2(entity.x * Constants.TILE_WIDTH, entity.y * Constants.TILE_HEIGHT)
+	global_position = Vector2(entity.position.x * Constants.TILE_WIDTH, entity.position.y * Constants.TILE_HEIGHT)
