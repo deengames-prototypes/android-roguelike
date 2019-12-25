@@ -29,9 +29,6 @@ func update_systems():
 	for system in _systems:
 		system.on_update()
 
-func get_ground():
-	return _ground_tilemap
-		
 func _setup(event_bus):
 	_setup_tilemaps()
 	_setup_systems(event_bus)
