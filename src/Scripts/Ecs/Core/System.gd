@@ -14,5 +14,8 @@ func add(e:Entity):
 		
 	entities.append(e)
 
+func remove(e: Entity):
+	entities.erase(e)
+
 func on_update():
 	pass
