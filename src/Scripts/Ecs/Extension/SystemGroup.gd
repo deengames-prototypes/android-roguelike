@@ -36,7 +36,7 @@ func _setup(event_bus):
 	_setup_tilemaps()
 	_setup_systems(event_bus)
 	event_bus.connect("spawn_entity", self, "add_entity")
-	event_bus.connect("kill_entity", self, "remove_entity")
+	event_bus.connect("entity_died", self, "remove_entity")
 
 func _setup_tilemaps():
 	var cell_size = Vector2(Constants.TILE_WIDTH, Constants.TILE_HEIGHT)
