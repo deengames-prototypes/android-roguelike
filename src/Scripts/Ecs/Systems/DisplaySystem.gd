@@ -53,7 +53,7 @@ func on_update():
 		var key = "%s, %s" % [entity.position.x, entity.position.y]
 		
 		# It's in our FOV, or it's a wall in fog-of-war
-		if  (_fov_cache.has(key) and _fov_cache[key] == true) or \
+		if  (_fov_cache.get(key) == true) or \
 			(component.tile_name == "Wall" and _fog_of_war_seen_tiles.has(key)):
 			var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
 			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
@@ -68,7 +68,7 @@ func _is_in_player_fov(x, y):
 			
 		return false
 		
-	return sqrt(pow(x - _player.position.x, 2) + pow(y - _player.position.y, 2)) <= player_sight
+	return _player.position.distance_to(Vector2(x, y)) <= player_sight
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):

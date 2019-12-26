@@ -21,7 +21,7 @@ func on_turn_end():
 		# Move only if player is in monster FOV.
 		# Expensive but accurate, assumes few monsters and done once per turn.
 		# If this is too expensive, switch to manhattan distance (no sqrt)
-		var distance = sqrt(pow(entity.position.x - _player.position.x, 2) + pow(entity.position.y - _player.position.y, 2))
+		var distance = _player.position.distance_to(entity.position)
 		if distance <= entity.get("SightComponent").sight_radius:
 			
 			var direction = entity.position.direction_to(_player.position)
