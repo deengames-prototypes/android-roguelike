@@ -8,7 +8,7 @@ func _init(event_bus):
 	_event_bus = event_bus
 
 func on_move_entity(attacker, x, y):
-	var attacked = get_attackable_entity(x, y)
+	var attacked = _get_attackable_entity(x, y)
 	if attacked == null or attacked == attacker:
 		return
 	
@@ -24,7 +24,7 @@ func on_move_entity(attacker, x, y):
 		print("entity killed")
 		_event_bus.emit_signal("entity_died", attacked)
 
-func get_attackable_entity(x, y):
+func _get_attackable_entity(x, y):
 	for e in entities:
 		if e.position.x == x and e.position.y == y:
 			return e

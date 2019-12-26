@@ -66,6 +66,6 @@ func spawn_enemies(empty_tiles, event_bus):
 			.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
 			.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))\
 			.add("ChasePlayerComponent", ChasePlayerComponent.new())
-		monster.sight_radius = 5
+		monster.sight_radius = 3
 		
 		event_bus.emit_signal("spawn_entity", monster)

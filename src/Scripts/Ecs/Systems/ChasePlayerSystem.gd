@@ -18,11 +18,17 @@ func on_turn_end():
 		return
 	
 	for entity in entities:
-		var direction = entity.position.direction_to(_player.position)
-		if abs(direction.x) > abs(direction.y):
-			_event_bus.emit_signal("move_entity", entity, entity.position.x + sign(direction.x), entity.position.y)
-		else:
-			_event_bus.emit_signal("move_entity", entity, entity.position.x, entity.position.y + sign(direction.y))
+		# Move only if player is in monster FOV.
+		# Expensive but accurate, assumes few monsters and done once per turn.
+		# If this is too expensive, switch to manhattan distance (no sqrt)
+		var distance = sqrt(pow(entity.position.x - _player.position.x, 2) + pow(entity.position.y - _player.position.y, 2))
+		if distance <= entity.sight_radius:
+			
+			var direction = entity.position.direction_to(_player.position)
+			if abs(direction.x) > abs(direction.y):
+				_event_bus.emit_signal("move_entity", entity, entity.position.x + sign(direction.x), entity.position.y)
+			else:
+				_event_bus.emit_signal("move_entity", entity, entity.position.x, entity.position.y + sign(direction.y))
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
