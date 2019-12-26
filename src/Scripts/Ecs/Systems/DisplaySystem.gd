@@ -30,25 +30,30 @@ func on_update():
 	_tiles_tilemap.clear()
 	_entities_tilemap.clear()
 	
+	# Fill with FOG. Note that this (expensively!) calculates full FOV every frame (!)
+	# TODO: cache this and only update it if the player moves.
+	for y in range(Constants.TILES_HIGH):
+		for x in range(Constants.TILES_WIDE):
+			if not _is_in_player_fov(x, y):
+				_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
+			
 	for entity in self.entities:
 		var component = entity.get("SpriteComponent")
 		var tilemap = tilemaps_by_name[component.layer]
 		
-		if _is_in_player_fov(entity):
+		if _is_in_player_fov(entity.position.x, entity.position.y):
 			var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
 			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
-		else:
-			tilemap.set_cell(entity.position.x, entity.position.y, -1)
 
-func _is_in_player_fov(entity):
-	if entity.position.x < _player.position.x - _player.sight_radius or \
-		entity.position.y < _player.position.y - _player.sight_radius or \
-		entity.position.x > _player.position.x + _player.sight_radius or \
-		entity.position.y > _player.position.y + _player.sight_radius:
+func _is_in_player_fov(x, y):
+	if x < _player.position.x - _player.sight_radius or \
+		y < _player.position.y - _player.sight_radius or \
+		x > _player.position.x + _player.sight_radius or \
+		y > _player.position.y + _player.sight_radius:
 			
 		return false
 		
-	return sqrt(pow(entity.position.x - _player.position.x, 2) + pow(entity.position.y - _player.position.y, 2)) <= _player.sight_radius
+	return sqrt(pow(x - _player.position.x, 2) + pow(y - _player.position.y, 2)) <= _player.sight_radius
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
