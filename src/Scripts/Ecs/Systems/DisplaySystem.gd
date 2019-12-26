@@ -5,7 +5,7 @@ var _entities_tilemap:TileMap
 
 var tilemaps_by_name = {}
 var _fov_cache = {} # [x, y] => true/false
-var _fog_of_war_seen_tiles = [] # [x, y] instances
+var _fog_of_war_seen_tiles = {} # [x, y] instances for O(1) search
 
 var _event_bus
 var _player = null
@@ -32,21 +32,29 @@ func on_update():
 	_tiles_tilemap.clear()
 	_entities_tilemap.clear()
 	
-	var populate_cache = _fov_cache.empty()	
+	var populate_cache = _fov_cache.empty()
 	# Fill with fog and populate FOV cache
 	for y in range(Constants.TILES_HIGH):
 		for x in range(Constants.TILES_WIDE):
 			var key = "%s, %s" % [x, y]
+			# Player just moved. Don't recalculate FOV every turn.
+			# Also, they may have gotten rid of some fog-of-war, so mark
+			# the current view as seen.
 			if populate_cache:
 				_fov_cache[key] = _is_in_player_fov(x, y)
-			if _fov_cache[key]:
+				if _fov_cache[key]:
+					_fog_of_war_seen_tiles[key] = true
+			if not _fov_cache[key]:
 				_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
 			
 	for entity in self.entities:
 		var component = entity.get("SpriteComponent")
 		var tilemap = tilemaps_by_name[component.layer]
 		var key = "%s, %s" % [entity.position.x, entity.position.y]
-		if _fov_cache[key]:
+		
+		# It's in our FOV, or it's a wall in fog-of-war
+		if  (_fov_cache.has(key) and _fov_cache[key] == true) or \
+			(component.tile_name == "Wall" and _fog_of_war_seen_tiles.has(key)):
 			var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
 			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
 
