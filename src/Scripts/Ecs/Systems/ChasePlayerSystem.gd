@@ -5,7 +5,7 @@ var _rng = RandomNumberGenerator.new()
 var _event_bus
 
 func _init(event_bus):
-	required_component_types = ["ChasePlayerComponent"]
+	required_component_types = ["ChasePlayerComponent", "SightComponent"]
 	_event_bus = event_bus
 	_event_bus.connect("end_turn", self, "on_turn_end")
 	# connect to spawn entity to get a reference to player entity
@@ -22,7 +22,7 @@ func on_turn_end():
 		# Expensive but accurate, assumes few monsters and done once per turn.
 		# If this is too expensive, switch to manhattan distance (no sqrt)
 		var distance = sqrt(pow(entity.position.x - _player.position.x, 2) + pow(entity.position.y - _player.position.y, 2))
-		if distance <= entity.sight_radius:
+		if distance <= entity.get("SightComponent").sight_radius:
 			
 			var direction = entity.position.direction_to(_player.position)
 			if abs(direction.x) > abs(direction.y):

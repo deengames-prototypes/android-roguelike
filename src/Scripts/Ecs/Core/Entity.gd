@@ -4,7 +4,6 @@ const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd
 
 # type (as a string) => instance
 var _components = {}
-var sight_radius = 0
 
 func _init(x, y):
 	position.x = x

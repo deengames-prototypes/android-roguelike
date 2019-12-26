@@ -59,14 +59,16 @@ func on_update():
 			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
 
 func _is_in_player_fov(x, y):
-	if x < _player.position.x - _player.sight_radius or \
-		y < _player.position.y - _player.sight_radius or \
-		x > _player.position.x + _player.sight_radius or \
-		y > _player.position.y + _player.sight_radius:
+	var player_sight = _player.get("SightComponent").sight_radius
+	
+	if x < _player.position.x - player_sight or \
+		y < _player.position.y - player_sight or \
+		x > _player.position.x + player_sight or \
+		y > _player.position.y + player_sight:
 			
 		return false
 		
-	return sqrt(pow(x - _player.position.x, 2) + pow(y - _player.position.y, 2)) <= _player.sight_radius
+	return sqrt(pow(x - _player.position.x, 2) + pow(y - _player.position.y, 2)) <= player_sight
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
