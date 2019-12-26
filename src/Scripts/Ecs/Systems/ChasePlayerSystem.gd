@@ -5,7 +5,7 @@ var _rng = RandomNumberGenerator.new()
 var _event_bus
 
 func _init(event_bus):
-	required_component_types = ["ChasePlayerComponent"]
+	required_component_types = ["ChasePlayerComponent", "SightComponent"]
 	_event_bus = event_bus
 	_event_bus.connect("end_turn", self, "on_turn_end")
 	# connect to spawn entity to get a reference to player entity
@@ -18,11 +18,17 @@ func on_turn_end():
 		return
 	
 	for entity in entities:
-		var direction = entity.position.direction_to(_player.position)
-		if abs(direction.x) > abs(direction.y):
-			_event_bus.emit_signal("move_entity", entity, entity.position.x + sign(direction.x), entity.position.y)
-		else:
-			_event_bus.emit_signal("move_entity", entity, entity.position.x, entity.position.y + sign(direction.y))
+		# Move only if player is in monster FOV.
+		# Expensive but accurate, assumes few monsters and done once per turn.
+		# If this is too expensive, switch to manhattan distance (no sqrt)
+		var distance = _player.position.distance_to(entity.position)
+		if distance <= entity.get("SightComponent").sight_radius:
+			
+			var direction = entity.position.direction_to(_player.position)
+			if abs(direction.x) > abs(direction.y):
+				_event_bus.emit_signal("move_entity", entity, entity.position.x + sign(direction.x), entity.position.y)
+			else:
+				_event_bus.emit_signal("move_entity", entity, entity.position.x, entity.position.y + sign(direction.y))
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):

@@ -42,7 +42,7 @@ func _setup_tilemaps():
 	_creatures_tilemap.cell_size = cell_size
 
 func _setup_systems(event_bus):
-	_systems.append(DisplaySystem.new(_ground_tilemap, _creatures_tilemap))
+	_systems.append(DisplaySystem.new(event_bus, _ground_tilemap, _creatures_tilemap))
 	_systems.append(PlayerMovementSystem.new(event_bus))
 	_systems.append(EntityMovementSystem.new(event_bus))
 	_systems.append(CameraSystem.new(_camera))
