@@ -25,7 +25,3 @@ func remove(type:String):
 		var component = self._components[type]
 		component.parent = null
 		self._components.erase(type)
-	
-############ extensions
-func sprite(image:String, layer:String):
-	return add("SpriteComponent", SpriteComponent.new(image, layer))
