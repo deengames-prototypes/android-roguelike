@@ -46,20 +46,26 @@ func spawn_walls(tilemap, event_bus):
 
 func spawn_player(empty_tiles, event_bus):
 	var tile = get_random_empty_tile(empty_tiles)
-	event_bus.emit_signal("spawn_entity", Entity.new(tile.x, tile.y)\
-					.add("SpriteComponent", SpriteComponent.new("Player", "Creatures"))\
-					.add("PlayerMovementComponent", PlayerMovementComponent.new())\
-					.add("CameraFollowComponent", CameraFollowComponent.new())\
-					.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
-					.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
-					)
+	
+	var player = Entity.new(tile.x, tile.y)\
+		.add("SpriteComponent", SpriteComponent.new("Player", "Creatures"))\
+		.add("PlayerMovementComponent", PlayerMovementComponent.new())\
+		.add("CameraFollowComponent", CameraFollowComponent.new())\
+		.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
+		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))
+	
+	player.sight_radius = 5
+	event_bus.emit_signal("spawn_entity", player)
 
 func spawn_enemies(empty_tiles, event_bus):
 	for i in rng.randi_range(Constants.MIN_ENEMIES_PER_DUNGEON, Constants.MAX_ENEMIES_PER_DUNGEON):
 		var tile = get_random_empty_tile(empty_tiles)
-		event_bus.emit_signal("spawn_entity", Entity.new(tile.x, tile.y)\
-						.add("SpriteComponent", SpriteComponent.new("Enemy", "Creatures")) \
-						.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
-						.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))\
-						.add("ChasePlayerComponent", ChasePlayerComponent.new())
-						)
+		
+		var monster = Entity.new(tile.x, tile.y)\
+			.add("SpriteComponent", SpriteComponent.new("Enemy", "Creatures")) \
+			.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE))\
+			.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH))\
+			.add("ChasePlayerComponent", ChasePlayerComponent.new())
+		monster.sight_radius = 5
+		
+		event_bus.emit_signal("spawn_entity", monster)
