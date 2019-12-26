@@ -4,6 +4,7 @@ var _tiles_tilemap:TileMap
 var _entities_tilemap:TileMap
 
 var tilemaps_by_name = {}
+var _fov_cache = {} # [x, y] => true/false
 var _fog_of_war_seen_tiles = [] # [x, y] instances
 
 var _event_bus
@@ -21,6 +22,7 @@ func _init(event_bus, tiles_tilemap:TileMap, entities_tilemap:TileMap):
 	}
 	
 	_event_bus.connect("spawn_entity", self, "on_spawn_entity")
+	_event_bus.connect("move_entity", self, "on_move_entity")
 
 func on_update():
 	
@@ -30,18 +32,21 @@ func on_update():
 	_tiles_tilemap.clear()
 	_entities_tilemap.clear()
 	
-	# Fill with FOG. Note that this (expensively!) calculates full FOV every frame (!)
-	# TODO: cache this and only update it if the player moves.
+	var populate_cache = _fov_cache.empty()	
+	# Fill with fog and populate FOV cache
 	for y in range(Constants.TILES_HIGH):
 		for x in range(Constants.TILES_WIDE):
-			if not _is_in_player_fov(x, y):
+			var key = "%s, %s" % [x, y]
+			if populate_cache:
+				_fov_cache[key] = _is_in_player_fov(x, y)
+			if _fov_cache[key]:
 				_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
 			
 	for entity in self.entities:
 		var component = entity.get("SpriteComponent")
 		var tilemap = tilemaps_by_name[component.layer]
-		
-		if _is_in_player_fov(entity.position.x, entity.position.y):
+		var key = "%s, %s" % [entity.position.x, entity.position.y]
+		if _fov_cache[key]:
 			var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
 			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
 
@@ -58,3 +63,7 @@ func _is_in_player_fov(x, y):
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
 		_player = entity
+
+func on_move_entity(entity, x, y):
+	if _player != null and entity == _player:
+		_fov_cache.clear()
