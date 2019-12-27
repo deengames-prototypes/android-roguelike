@@ -1,6 +1,7 @@
 extends Node
 
 const DisplaySystem = preload("res://Scripts/Ecs/Systems/DisplaySystem.gd")
+const FovSystem = preload("res://Scripts/Ecs/Systems/FovSystem.gd")
 const PlayerMovementSystem = preload("res://Scripts/Ecs/Systems/PlayerMovementSystem.gd")
 const EntityMovementSystem = preload("res://Scripts/Ecs/Systems/EntityMovementSystem.gd")
 const CameraSystem = preload("res://Scripts/Ecs/Systems/CameraSystem.gd")
@@ -43,6 +44,7 @@ func _setup_tilemaps():
 
 func _setup_systems(event_bus):
 	_systems.append(DisplaySystem.new(event_bus, _ground_tilemap, _creatures_tilemap))
+	_systems.append(FovSystem.new(event_bus))
 	_systems.append(PlayerMovementSystem.new(event_bus))
 	_systems.append(EntityMovementSystem.new(event_bus))
 	_systems.append(CameraSystem.new(_camera))
