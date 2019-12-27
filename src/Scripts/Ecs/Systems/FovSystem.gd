@@ -12,35 +12,45 @@ func _init(event_bus):
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
 		_player = entity
-		_event_bus.emit_signal("fov_change", calculate_player_fov())
+		update_player_fov()
 
 func on_move_entity(entity, new_position):
 	if _player != null and entity == _player:
-		var fov = calculate_player_fov()
-		_event_bus.emit_signal("fov_change", fov)
+		var pos = null
+		if _is_empty(new_position):
+			pos = new_position
+		update_player_fov(pos)
 
+func update_player_fov(pos=null):
+	if pos == null:
+		pos = _player.position
+	_event_bus.emit_signal("fov_change", calculate_fov_from(pos, _player.get("SightComponent").sight_radius))
 
-func calculate_player_fov():
+func calculate_fov_from(pos, radius):
 	# what really should be used here is a set
 	# though that has no equivalent in gdscript
 	# so a dictionary with nonsensical values will have to do
 	var fov = {} # Vector2(x, y) => true
 	for y in range(Constants.TILES_HIGH):
 		for x in range(Constants.TILES_WIDE):
-			var pos = Vector2(x, y)
-			if _is_in_player_fov(pos):
-				fov[pos] = true
+			var tile = Vector2(x, y)
+			if _is_in_fov(pos, radius, tile):
+				fov[tile] = true
 	
 	return fov
 
-func _is_in_player_fov(pos):
-	var player_sight = _player.get("SightComponent").sight_radius
-	
-	if pos.x < _player.position.x - player_sight or \
-		pos.y < _player.position.y - player_sight or \
-		pos.x > _player.position.x + player_sight or \
-		pos.y > _player.position.y + player_sight:
+func _is_in_fov(pos, radius, tile):
+	if tile.x < pos.x - radius or \
+		tile.y < pos.y - radius or \
+		tile.x > pos.x + radius or \
+		tile.y > pos.y + radius:
 			
 		return false
 		
-	return _player.position.distance_to(pos) <= player_sight
+	return pos.distance_to(tile) <= radius
+
+func _is_empty(pos):
+	for e in entities:
+		if e.position == pos:
+			return false
+	return true
