@@ -5,7 +5,7 @@ var _entities_tilemap:TileMap
 
 var tilemaps_by_name = {}
 var _fov_cache = {}
-var _fog_of_war_seen_tiles = {}
+var _fog_of_war_seen_tiles = {}  # Vector2(x, y) instances for O(1) search
 
 var _event_bus
 
@@ -30,7 +30,7 @@ func on_update():
 		for x in range(Constants.TILES_WIDE):
 			var pos = Vector2(x, y)
 			
-			# flood with walls
+			# flood with fog
 			_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
 			
 			# except in fov or seen before
