@@ -25,10 +25,12 @@ func on_turn_end():
 		if distance <= entity.get("SightComponent").sight_radius:
 			
 			var direction = entity.position.direction_to(_player.position)
+			var mod = Vector2()
 			if abs(direction.x) > abs(direction.y):
-				_event_bus.emit_signal("move_entity", entity, entity.position.x + sign(direction.x), entity.position.y)
+				mod.x = sign(direction.x)
 			else:
-				_event_bus.emit_signal("move_entity", entity, entity.position.x, entity.position.y + sign(direction.y))
+				mod.y = sign(direction.y)
+			_event_bus.emit_signal("move_entity", entity, entity.position + mod)
 
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):

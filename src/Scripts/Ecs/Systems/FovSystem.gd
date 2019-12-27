@@ -14,7 +14,7 @@ func on_spawn_entity(entity):
 		_player = entity
 		_event_bus.emit_signal("fov_change", calculate_player_fov())
 
-func on_move_entity(entity, x, y):
+func on_move_entity(entity, new_position):
 	if _player != null and entity == _player:
 		var fov = calculate_player_fov()
 		_event_bus.emit_signal("fov_change", fov)
