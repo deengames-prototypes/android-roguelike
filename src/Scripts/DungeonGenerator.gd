@@ -43,7 +43,7 @@ func spawn_walls(tilemap, event_bus):
 	for x in range(Constants.TILES_WIDE):
 		for y in range(Constants.TILES_HIGH):
 			if tilemap.get_cell(x, y) == 0:
-				event_bus.emit_signal("spawn_entity", Entity.new(x, y).add("SpriteComponent", SpriteComponent.new("Wall", "Ground")))
+				event_bus.emit_signal("spawn_entity", Entity.new(x, y).add("SpriteComponent", SpriteComponent.new("Wall", "Ground", "DiscoveredWall")))
 
 func spawn_player(empty_tiles, event_bus):
 	var tile = get_random_empty_tile(empty_tiles)

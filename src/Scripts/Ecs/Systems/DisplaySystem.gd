@@ -47,8 +47,8 @@ func on_update():
 			tilemap.set_cell(entity.position.x, entity.position.y, tilemap.tile_set.find_tile_by_name(component.tile_name))
 		
 		elif _fog_of_war_seen_tiles.has(entity.position):
-			if component.tile_name == "Wall":
-				_tiles_tilemap.set_cell(entity.position.x, entity.position.y, _tiles_tilemap.tile_set.find_tile_by_name("DiscoveredWall"))
+			if component.seen_tile_name != null:
+				_tiles_tilemap.set_cell(entity.position.x, entity.position.y, _tiles_tilemap.tile_set.find_tile_by_name(component.seen_tile_name))
 
 func on_fov_change(new_fov):
 	_fov_cache = new_fov
