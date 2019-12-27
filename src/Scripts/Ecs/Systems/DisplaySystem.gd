@@ -44,19 +44,28 @@ func on_update():
 				_fov_cache[key] = _is_in_player_fov(x, y)
 				if _fov_cache[key]:
 					_fog_of_war_seen_tiles[key] = true
+					
 			if not _fov_cache[key]:
-				_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
-			
+				if _fog_of_war_seen_tiles.has(key):
+					_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("DiscoveredFloor"))
+				else:
+					_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Fog"))
+			else:
+				_tiles_tilemap.set_cell(x, y, _tiles_tilemap.tile_set.find_tile_by_name("Floor"))
+				
 	for entity in self.entities:
 		var component = entity.get("SpriteComponent")
 		var tilemap = tilemaps_by_name[component.layer]
 		var key = "%s, %s" % [entity.position.x, entity.position.y]
 		
 		# It's in our FOV, or it's a wall in fog-of-war
-		if  (_fov_cache.get(key) == true) or \
-			(component.tile_name == "Wall" and _fog_of_war_seen_tiles.has(key)):
-			var tile_index = tilemap.tile_set.find_tile_by_name(component.tile_name)
-			tilemap.set_cell(entity.position.x, entity.position.y, tile_index)
+		if component.tile_name == "Wall":
+			if not _fov_cache[key] and _fog_of_war_seen_tiles.has(key):
+				_tiles_tilemap.set_cell(entity.position.x, entity.position.y, _tiles_tilemap.tile_set.find_tile_by_name("Wall"))
+			elif _fov_cache[key]:
+				_tiles_tilemap.set_cell(entity.position.x, entity.position.y, _tiles_tilemap.tile_set.find_tile_by_name("DiscoveredWall"))
+		elif _fov_cache[key]:
+			tilemap.set_cell(entity.position.x, entity.position.y, tilemap.tile_set.find_tile_by_name(component.tile_name))
 
 func _is_in_player_fov(x, y):
 	var player_sight = _player.get("SightComponent").sight_radius
