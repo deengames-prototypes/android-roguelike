@@ -34,14 +34,13 @@ func spawn_walls(tilemap, event_bus):
 	for x in range(Constants.TILES_WIDE):
 		for y in range(Constants.TILES_HIGH):
 			if tilemap.get_cell(x, y) == 0:
-				var tile = Vector2(x, y)
-				event_bus.emit_signal("spawn_entity", _entity_factory.create_wall(tile))
+				event_bus.emit_signal("spawn_entity", _entity_factory.create_wall(x, y))
 
 func spawn_player(empty_tiles, event_bus):
 	var tile = get_random_empty_tile(empty_tiles)
-	event_bus.emit_signal("spawn_entity", _entity_factory.create_player(tile))
+	event_bus.emit_signal("spawn_entity", _entity_factory.create_player(tile.x, tile.y))
 
 func spawn_enemies(empty_tiles, event_bus):
 	for i in rng.randi_range(Constants.MIN_ENEMIES_PER_DUNGEON, Constants.MAX_ENEMIES_PER_DUNGEON):
 		var tile = get_random_empty_tile(empty_tiles)
-		event_bus.emit_signal("spawn_entity", _entity_factory.create_monster(tile))
+		event_bus.emit_signal("spawn_entity", _entity_factory.create_monster(tile.x, tile.y))
