@@ -8,18 +8,18 @@ func _init(event_bus):
 
 func on_update():
 	for entity in self.entities:
-		var mod = Vector2()
+		var movement = Vector2()
 		if Input.is_action_just_pressed("move_up"):
-			mod.y -= 1
+			movement.y -= 1
 		if Input.is_action_just_pressed("move_down"):
-			mod.y += 1
+			movement.y += 1
 		if Input.is_action_just_pressed("move_left"):
-			mod.x -= 1
+			movement.x -= 1
 		if Input.is_action_just_pressed("move_right"):
-			mod.x += 1
+			movement.x += 1
 		
-		if mod != Vector2(0, 0):
-			_event_bus.emit_signal("move_entity", entity, entity.position + mod)
+		if movement != Vector2(0, 0):
+			_event_bus.emit_signal("move_entity", entity, entity.position + movement)
 			end_turn()
 
 func end_turn():
