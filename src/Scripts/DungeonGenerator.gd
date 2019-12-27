@@ -43,13 +43,13 @@ func spawn_walls(tilemap, event_bus):
 	for x in range(Constants.TILES_WIDE):
 		for y in range(Constants.TILES_HIGH):
 			if tilemap.get_cell(x, y) == 0:
-				event_bus.emit_signal("spawn_entity", Entity.new(x, y).add("SpriteComponent", SpriteComponent.new("Wall", "Ground", "DiscoveredWall")))
+				event_bus.emit_signal("spawn_entity", Entity.new(x, y).add("SpriteComponent", SpriteComponent.new("Ground", "Wall", "DiscoveredWall")))
 
 func spawn_player(empty_tiles, event_bus):
 	var tile = get_random_empty_tile(empty_tiles)
 	
 	var player = Entity.new(tile.x, tile.y) \
-		.add("SpriteComponent", SpriteComponent.new("Player", "Creatures")) \
+		.add("SpriteComponent", SpriteComponent.new("Creatures", "Player")) \
 		.add("PlayerMovementComponent", PlayerMovementComponent.new()) \
 		.add("CameraFollowComponent", CameraFollowComponent.new()) \
 		.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
@@ -63,7 +63,7 @@ func spawn_enemies(empty_tiles, event_bus):
 		var tile = get_random_empty_tile(empty_tiles)
 		
 		var monster = Entity.new(tile.x, tile.y) \
-			.add("SpriteComponent", SpriteComponent.new("Enemy", "Creatures")) \
+			.add("SpriteComponent", SpriteComponent.new("Creatures", "Enemy")) \
 			.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 			.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
 			.add("ChasePlayerComponent", ChasePlayerComponent.new()) \
