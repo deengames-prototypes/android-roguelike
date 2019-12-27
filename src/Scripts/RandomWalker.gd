@@ -15,16 +15,16 @@ func _init(max_x, max_y, rng):
 	position.y = _rng.randi_range(0, _max_y)
 
 func walk():
-	var mod = Vector2()
+	var movement = Vector2()
 	if _rng.randf() < 0.5:
-		mod.y = 1 * rand_sign()
+		movement.y = 1 * rand_sign()
 	else:
-		mod.x = 1 * rand_sign()
+		movement.x = 1 * rand_sign()
 	
-	if is_out_of_bounds(position + mod):
+	if is_out_of_bounds(position + movement):
 		walk()
 	else:
-		position += mod
+		position += movement
 		_history.append(position)
 
 func rand_sign():
