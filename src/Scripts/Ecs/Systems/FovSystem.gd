@@ -12,18 +12,13 @@ func _init(event_bus):
 func on_spawn_entity(entity):
 	if entity.has("PlayerMovementComponent"):
 		_player = entity
-		update_player_fov()
+		update_player_fov(_player.position)
 
 func on_move_entity(entity, new_position):
-	if _player != null and entity == _player:
-		var pos = null
-		if _is_empty(new_position):
-			pos = new_position
-		update_player_fov(pos)
+	if _player != null and entity == _player and _is_empty(new_position):
+		update_player_fov(new_position)
 
-func update_player_fov(pos=null):
-	if pos == null:
-		pos = _player.position
+func update_player_fov(pos):
 	_event_bus.emit_signal("fov_change", calculate_fov_from(pos, _player.get("SightComponent").sight_radius))
 
 func calculate_fov_from(pos, radius):
