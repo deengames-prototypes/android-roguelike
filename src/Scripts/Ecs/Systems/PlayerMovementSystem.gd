@@ -11,11 +11,11 @@ func on_update():
 		var movement = Vector2()
 		if Input.is_action_just_pressed("move_up"):
 			movement.y -= 1
-		if Input.is_action_just_pressed("move_down"):
+		elif Input.is_action_just_pressed("move_down"):
 			movement.y += 1
-		if Input.is_action_just_pressed("move_left"):
+		elif Input.is_action_just_pressed("move_left"):
 			movement.x -= 1
-		if Input.is_action_just_pressed("move_right"):
+		elif Input.is_action_just_pressed("move_right"):
 			movement.x += 1
 		
 		if movement != Vector2(0, 0):
