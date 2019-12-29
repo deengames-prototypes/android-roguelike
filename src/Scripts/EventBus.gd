@@ -8,7 +8,7 @@ signal entity_died(entity)
 signal end_turn()
 signal fov_change(fov)
 signal change_entity(entity)
-signal change_player(player_entity)
+signal set_player(player_entity)
 
 signal add_healthbar(healthbar)
 signal remove_healthbar(healthbar)
