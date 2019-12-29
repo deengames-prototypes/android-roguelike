@@ -12,7 +12,7 @@ func on_move_entity(attacker, new_position):
 	if attacked == null or attacked == attacker:
 		return
 	
-	var attack_component = attacker.get("AttackComponent")
+	var attack_component = attacker.get("MeleeComponent")
 	if attack_component == null:
 		return
 	
