@@ -5,14 +5,13 @@ var _player = null
 
 func _init(event_bus):
 	_event_bus = event_bus
-	
-	_event_bus.connect("spawn_entity", self, "on_spawn_entity")
-	_event_bus.connect("move_entity", self, "on_move_entity")
 
-func on_spawn_entity(entity):
-	if entity.has("PlayerControlComponent"):
-		_player = entity
-		update_player_fov(_player.position)
+	_event_bus.connect("move_entity", self, "on_move_entity")
+	_event_bus.connect("change_player", self, "on_change_player")
+
+func on_change_player(player):
+	_player = player
+	update_player_fov(_player.position)
 
 func on_move_entity(entity, new_position):
 	if _player != null and entity == _player and _is_empty(new_position):
