@@ -11,6 +11,7 @@ const HealthBarSystem = preload("res://Scripts/Ecs/Systems/HealthBarSystem.gd")
 const DamageSystem = preload("res://Scripts/Ecs/Systems/DamageSystem.gd")
 const SkillSelectSystem = preload("res://Scripts/Ecs/Systems/SkillSelectSystem.gd")
 const TargetedSkillSystem = preload("res://Scripts/Ecs/Systems/TargetedSkillSystem.gd")
+const PlayerUpdateSystem = preload("res://Scripts/Ecs/Systems/PlayerUpdateSystem.gd")
 
 # skill systems
 const BowAttackSystem = preload("res://Scripts/Ecs/Systems/Skills/BowAttackSystem.gd")
@@ -34,6 +35,10 @@ func remove_entity(e):
 	for system in _systems:
 		system.remove(e)
 
+func change_entity(e):
+	remove_entity(e)
+	add_entity(e)
+
 func update_systems():
 	for system in _systems:
 		system.on_update()
@@ -42,6 +47,7 @@ func _setup(event_bus):
 	_setup_tilemaps()
 	_setup_systems(event_bus)
 	event_bus.connect("spawn_entity", self, "add_entity")
+	event_bus.connect("change_entity", self, "change_entity")
 	event_bus.connect("entity_died", self, "remove_entity")
 
 func _setup_tilemaps():
@@ -62,3 +68,4 @@ func _setup_systems(event_bus):
 	_systems.append(SkillSelectSystem.new())
 	_systems.append(TargetedSkillSystem.new(event_bus, _camera, _creatures_tilemap))
 	_systems.append(BowAttackSystem.new(event_bus))
+	_systems.append(PlayerUpdateSystem.new(event_bus))
