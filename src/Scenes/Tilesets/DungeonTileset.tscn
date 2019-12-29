@@ -4,14 +4,14 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Wall" type="Sprite" parent="."]
+[node name="DiscoveredWall" type="Sprite" parent="."]
 position = Vector2( 0.135277, -0.135275 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 96, 64, 32, 32 )
 
-[node name="DiscoveredWall" type="Sprite" parent="."]
+[node name="Wall" type="Sprite" parent="."]
 position = Vector2( 40.1353, -0.135275 )
 texture = ExtResource( 1 )
 centered = false
