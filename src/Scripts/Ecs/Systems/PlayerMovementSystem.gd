@@ -3,7 +3,7 @@ extends "res://Scripts/Ecs/Core/System.gd"
 var _event_bus
 
 func _init(event_bus):
-	self.required_component_types = ["PlayerMovementComponent"]
+	self.required_component_types = ["PlayerControlComponent"]
 	_event_bus = event_bus
 
 func on_update():

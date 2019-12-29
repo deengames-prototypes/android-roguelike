@@ -4,14 +4,14 @@ const AttackComponent = preload("res://Scripts/Ecs/Components/AttackComponent.gd
 const CameraFollowComponent = preload("res://Scripts/Ecs/Components/CameraFollowComponent.gd")
 const ChasePlayerComponent = preload("res://Scripts/Ecs/Components/ChasePlayerComponent.gd")
 const HealthComponent = preload("res://Scripts/Ecs/Components/HealthComponent.gd")
-const PlayerMovementComponent = preload("res://Scripts/Ecs/Components/PlayerMovementComponent.gd")
+const PlayerControlComponent = preload("res://Scripts/Ecs/Components/PlayerControlComponent.gd")
 const SightComponent = preload("res://Scripts/Ecs/Components/SightComponent.gd")
 const SpriteComponent = preload("res://Scripts/Ecs/Components/SpriteComponent.gd")
 
 func create_player(x, y):
     return Entity.new(x, y) \
 		.add("SpriteComponent", SpriteComponent.new("Creatures", "Player")) \
-		.add("PlayerMovementComponent", PlayerMovementComponent.new()) \
+		.add("PlayerControlComponent", PlayerControlComponent.new()) \
 		.add("CameraFollowComponent", CameraFollowComponent.new()) \
 		.add("AttackComponent", AttackComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \

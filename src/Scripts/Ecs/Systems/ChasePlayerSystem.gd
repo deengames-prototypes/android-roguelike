@@ -33,5 +33,5 @@ func on_turn_end():
 			_event_bus.emit_signal("move_entity", entity, entity.position + movement)
 
 func on_spawn_entity(entity):
-	if entity.has("PlayerMovementComponent"):
+	if entity.has("PlayerControlComponent"):
 		_player = entity
