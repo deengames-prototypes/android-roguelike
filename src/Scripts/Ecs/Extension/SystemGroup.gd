@@ -9,6 +9,11 @@ const CombatSystem = preload("res://Scripts/Ecs/Systems/CombatSystem.gd")
 const ChasePlayerSystem = preload("res://Scripts/Ecs/Systems/ChasePlayerSystem.gd")
 const HealthBarSystem = preload("res://Scripts/Ecs/Systems/HealthBarSystem.gd")
 const DamageSystem = preload("res://Scripts/Ecs/Systems/DamageSystem.gd")
+const SkillSelectSystem = preload("res://Scripts/Ecs/Systems/SkillSelectSystem.gd")
+const TargetedSkillSystem = preload("res://Scripts/Ecs/Systems/TargetedSkillSystem.gd")
+
+# skill systems
+const BowAttackSystem = preload("res://Scripts/Ecs/Systems/Skills/BowAttackSystem.gd")
 
 var _ground_tilemap:TileMap
 var _creatures_tilemap:TileMap
@@ -54,3 +59,6 @@ func _setup_systems(event_bus):
 	_systems.append(ChasePlayerSystem.new(event_bus))
 	_systems.append(HealthBarSystem.new(event_bus))
 	_systems.append(DamageSystem.new(event_bus))
+	_systems.append(SkillSelectSystem.new())
+	_systems.append(TargetedSkillSystem.new(event_bus, _camera, _creatures_tilemap))
+	_systems.append(BowAttackSystem.new(event_bus))
