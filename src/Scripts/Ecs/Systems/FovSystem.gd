@@ -10,7 +10,7 @@ func _init(event_bus):
 	_event_bus.connect("move_entity", self, "on_move_entity")
 
 func on_spawn_entity(entity):
-	if entity.has("PlayerMovementComponent"):
+	if entity.has("PlayerControlComponent"):
 		_player = entity
 		update_player_fov(_player.position)
 

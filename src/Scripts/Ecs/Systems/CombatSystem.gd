@@ -12,17 +12,11 @@ func on_move_entity(attacker, new_position):
 	if attacked == null or attacked == attacker:
 		return
 	
-	var attack_component = attacker.get("AttackComponent")
+	var attack_component = attacker.get("MeleeComponent")
 	if attack_component == null:
 		return
 	
-	var health_component = attacked.get("HealthComponent")
-	
-	health_component.health -= attack_component.damage
-	print("entity attacked")
-	if health_component.health <= 0:
-		print("entity killed")
-		_event_bus.emit_signal("entity_died", attacked)
+	_event_bus.emit_signal("damage_entity", attacked, attack_component.damage)
 
 func _get_attackable_entity(position):
 	for e in entities:
