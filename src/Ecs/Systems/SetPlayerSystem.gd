@@ -9,4 +9,4 @@ func _init(event_bus):
 
 func on_change_entity(entity):
 	if entity.has("PlayerControlComponent"):
-		_event_bus.emit_signal("change_player", entity)
+		_event_bus.emit_signal("set_player", entity)

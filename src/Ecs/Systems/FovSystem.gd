@@ -7,9 +7,9 @@ func _init(event_bus):
 	_event_bus = event_bus
 
 	_event_bus.connect("move_entity", self, "on_move_entity")
-	_event_bus.connect("change_player", self, "on_change_player")
+	_event_bus.connect("set_player", self, "on_set_player")
 
-func on_change_player(player):
+func on_set_player(player):
 	_player = player
 	update_player_fov(_player.position)
 

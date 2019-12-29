@@ -8,7 +8,7 @@ func _init(event_bus):
 	required_component_types = ["ChasePlayerComponent", "SightComponent"]
 	_event_bus = event_bus
 	_event_bus.connect("end_turn", self, "on_turn_end")
-	_event_bus.connect("change_player", self, "on_change_player")
+	_event_bus.connect("set_player", self, "on_set_player")
 	
 	_rng.randomize()
 
@@ -31,5 +31,5 @@ func on_turn_end():
 				movement.y = sign(direction.y)
 			_event_bus.emit_signal("move_entity", entity, entity.position + movement)
 
-func on_change_player(player):
+func on_set_player(player):
 	_player = player
