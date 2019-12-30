@@ -10,7 +10,7 @@ func _init(event_bus):
 func activate(source, target: Vector2):
 	# TODO: ensure line of sight
 	var target_entity = _get_entity_at(target)
-	if target_entity != null and not source == target_entity:
+	if target_entity != null and source != target_entity:
 		var damage = Constants.BOW_BASE_DAMAGE
 		var distance = int(source.position.distance_to(target)) - 1
 		damage -= Constants.BOW_DAMAGE_LOSS_PER_DISTANCE_UNIT * distance
