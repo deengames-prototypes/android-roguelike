@@ -9,32 +9,32 @@ position = Vector2( 0.135277, -0.135275 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 96, 64, 32, 32 )
+region_rect = Rect2( 144, 96, 48, 48 )
 
 [node name="Wall" type="Sprite" parent="."]
 position = Vector2( 40.1353, -0.135275 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 48, 48 )
 
 [node name="Floor" type="Sprite" parent="."]
 position = Vector2( 80, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 32, 128, 32, 32 )
+region_rect = Rect2( 48, 192, 48, 48 )
 
 [node name="DiscoveredFloor" type="Sprite" parent="."]
 position = Vector2( 120, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 128, 32, 32 )
+region_rect = Rect2( 0, 192, 48, 48 )
 
 [node name="Fog" type="Sprite" parent="."]
 position = Vector2( 160, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 64, 32, 32 )
+region_rect = Rect2( 0, 96, 48, 48 )

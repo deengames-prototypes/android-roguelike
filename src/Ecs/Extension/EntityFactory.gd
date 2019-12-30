@@ -27,7 +27,7 @@ func create_monster(x, y):
         .add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
         .add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
         .add("ChasePlayerComponent", ChasePlayerComponent.new()) \
-        .add("SightComponent", SightComponent.new(3))
+        .add("SightComponent", SightComponent.new(Constants.MONSTER_SIGHT))
 
 func create_wall(x, y):
 	return Entity.new(x, y).add("SpriteComponent", SpriteComponent.new("Ground", "Wall", "DiscoveredWall"))
