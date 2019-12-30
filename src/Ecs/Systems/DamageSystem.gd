@@ -7,6 +7,7 @@ func _init(event_bus):
 	_event_bus = event_bus
 
 func on_damage_entity(entity, damage):
+	damage = max(damage, 0)
 	var health_component = entity.get("HealthComponent")
 	health_component.health -= damage
 	
