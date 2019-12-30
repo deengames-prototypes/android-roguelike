@@ -1,16 +1,14 @@
 extends "res://Ecs/Core/System.gd"
 
-var _tilemap
 var _event_bus
 
-func _init(event_bus, tilemap):
-	_event_bus = event_bus
-	_tilemap = tilemap
+func _init(event_bus):
 	required_component_types = ["PlayerControlComponent", "SkillComponent"]
+	_event_bus = event_bus
+	_event_bus.connect("activate_tile", self, "on_activate_tile")
 
-func _process(delta):
-	if Input.is_action_just_pressed("activate_tile"):
-		for e in entities:
-			var skill = e.get("SkillComponent").active
-			if skill != null and skill.type == skill.TYPES.TARGETED:
-				_event_bus.emit_signal(skill.signal_name, e, _tilemap.world_to_map(get_global_mouse_position()))
+func on_activate_tile(tile):
+	for e in entities:
+		var skill = e.get("SkillComponent").active
+		if skill != null and skill.type == skill.TYPES.TARGETED:
+			_event_bus.emit_signal(skill.signal_name, e, tile)
