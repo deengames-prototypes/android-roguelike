@@ -15,4 +15,4 @@ signal remove_healthbar(healthbar)
 signal activate_tile(tile)
 
 # skills
-signal bow_attack(source, target)
+signal bow_attack(source_entity, target)
