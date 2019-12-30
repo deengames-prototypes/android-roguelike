@@ -6,7 +6,7 @@
 [node name="SkillMenu" type="Node2D"]
 
 [node name="Skill1" type="TouchScreenButton" parent="."]
-editor/display_folded = true
+scale = Vector2( 4, 4 )
 normal = ExtResource( 1 )
 shape_centered = false
 action = "skill_1"
