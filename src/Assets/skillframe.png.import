@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dpadbutton.png-f861596182b306152db5a039ccd05231.stex"
+path="res://.import/skillframe.png-5740b6e4ae5f44f47b871cba7878bcc4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/dpadbutton.png"
-dest_files=[ "res://.import/dpadbutton.png-f861596182b306152db5a039ccd05231.stex" ]
+source_file="res://Assets/skillframe.png"
+dest_files=[ "res://.import/skillframe.png-5740b6e4ae5f44f47b871cba7878bcc4.stex" ]
 
 [params]
 

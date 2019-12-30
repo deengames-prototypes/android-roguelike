@@ -12,6 +12,7 @@ const DamageSystem = preload("res://Ecs/Systems/DamageSystem.gd")
 const SkillSelectSystem = preload("res://Ecs/Systems/SkillSelectSystem.gd")
 const TargetedSkillSystem = preload("res://Ecs/Systems/TargetedSkillSystem.gd")
 const SetPlayerSystem = preload("res://Ecs/Systems/SetPlayerSystem.gd")
+const ActivateTileSystem = preload("res://Ecs/Systems/ActivateTileSystem.gd")
 
 # skill systems
 const BowAttackSystem = preload("res://Skills/Systems/BowAttackSystem.gd")
@@ -51,8 +52,9 @@ func _setup_systems(ground_tilemap, creatures_tilemap, camera, event_bus):
 	add_child(HealthBarSystem.new(event_bus))
 	add_child(DamageSystem.new(event_bus))
 	add_child(SkillSelectSystem.new())
-	add_child(TargetedSkillSystem.new(event_bus, creatures_tilemap))
+	add_child(TargetedSkillSystem.new(event_bus))
 	add_child(SetPlayerSystem.new(event_bus))
+	add_child(ActivateTileSystem.new(event_bus, creatures_tilemap))
 
 	# skills
 	add_child(BowAttackSystem.new(event_bus))

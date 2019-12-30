@@ -12,6 +12,7 @@ signal set_player(player_entity)
 
 signal add_healthbar(healthbar)
 signal remove_healthbar(healthbar)
+signal activate_tile(tile)
 
 # skills
-signal bow_attack(target)
+signal bow_attack(source_entity, target)

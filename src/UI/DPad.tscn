@@ -3,16 +3,17 @@
 [ext_resource path="res://Assets/dpadbutton.png" type="Texture" id=1]
 
 [node name="DPad" type="Node2D"]
+scale = Vector2( 8, 8 )
 
 [node name="Up" type="TouchScreenButton" parent="."]
-position = Vector2( 64, 0 )
+position = Vector2( 8, 0 )
 normal = ExtResource( 1 )
 shape_centered = false
 action = "move_up"
 visibility_mode = 1
 
 [node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2( 192, 64 )
+position = Vector2( 24, 8 )
 rotation = 1.5708
 normal = ExtResource( 1 )
 shape_centered = false
@@ -20,14 +21,14 @@ action = "move_right"
 visibility_mode = 1
 
 [node name="Down" type="TouchScreenButton" parent="."]
-position = Vector2( 128, 192 )
+position = Vector2( 16, 24 )
 rotation = 3.14159
 normal = ExtResource( 1 )
 action = "move_down"
 visibility_mode = 1
 
 [node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2( 0, 128 )
+position = Vector2( 0, 16 )
 rotation = -1.5708
 normal = ExtResource( 1 )
 action = "move_left"

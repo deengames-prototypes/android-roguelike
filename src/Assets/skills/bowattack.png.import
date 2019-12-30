@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dpadbutton.png-f861596182b306152db5a039ccd05231.stex"
+path="res://.import/bowattack.png-fd964368da73e2ee853eec9455d882ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/dpadbutton.png"
-dest_files=[ "res://.import/dpadbutton.png-f861596182b306152db5a039ccd05231.stex" ]
+source_file="res://Assets/skills/bowattack.png"
+dest_files=[ "res://.import/bowattack.png-fd964368da73e2ee853eec9455d882ae.stex" ]
 
 [params]
 
