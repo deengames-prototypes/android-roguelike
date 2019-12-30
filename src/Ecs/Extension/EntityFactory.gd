@@ -21,6 +21,16 @@ func create_player(x, y):
 		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
 		.add("SkillComponent", SkillComponent.new([BowAttack.new()]))
 
+func create_sister(x, y):
+	return Entity.new(x, y) \
+		.add("SpriteComponent", SpriteComponent.new("Creatures", "Sister")) \
+		.add("PlayerControlComponent", PlayerControlComponent.new()) \
+		.add("CameraFollowComponent", CameraFollowComponent.new()) \
+		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
+		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
+		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
+		.add("SkillComponent", SkillComponent.new([BowAttack.new()]))
+
 func create_monster(x, y):
     return Entity.new(x, y) \
         .add("SpriteComponent", SpriteComponent.new("Creatures", "Enemy")) \
