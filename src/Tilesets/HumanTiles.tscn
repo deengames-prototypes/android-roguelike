@@ -10,8 +10,15 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
 
+[node name="Sister" type="Sprite" parent="."]
+position = Vector2( 0, 60 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 144, 48, 48, 48 )
+
 [node name="Enemy" type="Sprite" parent="."]
-position = Vector2( 35.1991, 4.67281 )
+position = Vector2( 45.1991, 4.67281 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
