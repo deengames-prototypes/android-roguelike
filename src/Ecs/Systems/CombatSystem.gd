@@ -8,6 +8,7 @@ func _init(event_bus):
 	_event_bus = event_bus
 
 func on_move_entity(attacker, new_position):
+	# TODO: make TeamComponent, ensure entities on the same team can't attack each other
 	var attacked = _get_attackable_entity(new_position)
 	if attacked == null or attacked == attacker:
 		return

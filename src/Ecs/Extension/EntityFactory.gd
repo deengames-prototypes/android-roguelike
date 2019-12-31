@@ -8,12 +8,14 @@ const PlayerControlComponent = preload("res://Ecs/Components/PlayerControlCompon
 const SightComponent = preload("res://Ecs/Components/SightComponent.gd")
 const SpriteComponent = preload("res://Ecs/Components/SpriteComponent.gd")
 const SkillComponent = preload("res://Ecs/Components/SkillComponent.gd")
+const PlayableComponent = preload("res://Ecs/Components/PlayableComponent.gd")
 
 const BowAttack = preload("res://Skills/Components/BowAttack.gd")
 
 func create_player(x, y):
 	return Entity.new(x, y) \
 		.add("SpriteComponent", SpriteComponent.new("Creatures", "Player")) \
+		.add("PlayableComponent", PlayableComponent.new()) \
 		.add("PlayerControlComponent", PlayerControlComponent.new()) \
 		.add("CameraFollowComponent", CameraFollowComponent.new()) \
 		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
@@ -24,8 +26,7 @@ func create_player(x, y):
 func create_sister(x, y):
 	return Entity.new(x, y) \
 		.add("SpriteComponent", SpriteComponent.new("Creatures", "Sister")) \
-		.add("PlayerControlComponent", PlayerControlComponent.new()) \
-		.add("CameraFollowComponent", CameraFollowComponent.new()) \
+		.add("PlayableComponent", PlayableComponent.new()) \
 		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
 		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
