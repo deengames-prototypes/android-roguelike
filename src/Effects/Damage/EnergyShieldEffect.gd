@@ -5,6 +5,7 @@ var strength
 func _init(parent, _strength):
     _super(parent)
     strength = _strength
+    tile_name = 'EnergyShield'
 
 func process_damage(damage):
     # shield nullifies damage

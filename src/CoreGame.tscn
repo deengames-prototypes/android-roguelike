@@ -24,7 +24,11 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 65536, 0,
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 48, 48 )
 format = 1
-tile_data = PoolIntArray( 524303, 0, 0 )
+tile_data = PoolIntArray( 524302, 1, 0, 524303, 0, 0 )
+
+[node name="Effects" type="TileMap" parent="."]
+cell_size = Vector2( 48, 48 )
+format = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 

@@ -4,6 +4,7 @@ extends Node
 # with this class defining stubs that do nothing, so an effect only defines what it needs.
 
 var _parent
+var tile_name: String
 
 func _super(parent):
     _parent = parent
