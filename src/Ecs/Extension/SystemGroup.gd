@@ -52,7 +52,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, camera, event_bus):
 	add_child(ChasePlayerSystem.new(event_bus))
 	add_child(HealthBarSystem.new(event_bus))
 	add_child(DamageSystem.new(event_bus))
-	add_child(SkillSelectSystem.new())
+	add_child(SkillSelectSystem.new(event_bus))
 	add_child(TargetedSkillSystem.new(event_bus))
 	add_child(SetPlayerSystem.new(event_bus))
 	add_child(ActivateTileSystem.new(event_bus, creatures_tilemap))
