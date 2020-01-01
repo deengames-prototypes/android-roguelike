@@ -16,6 +16,7 @@ const ActivateTileSystem = preload("res://Ecs/Systems/ActivateTileSystem.gd")
 const PlayerSwitchSystem = preload("res://Ecs/Systems/PlayerSwitchSystem.gd")
 const SelfSkillSystem = preload("res://Ecs/Systems/SelfSkillSystem.gd")
 const EffectsDisplaySystem = preload("res://Ecs/Systems/EffectsDisplaySystem.gd")
+const DamageModifierSystem = preload("res://Ecs/Systems/DamageModifierSystem.gd")
 
 # skill systems
 const BowAttackSystem = preload("res://Skills/Systems/BowAttackSystem.gd")
@@ -63,6 +64,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(PlayerSwitchSystem.new(event_bus))
 	add_child(SelfSkillSystem.new(event_bus))
 	add_child(EffectsDisplaySystem.new(effects_tilemap))
+	add_child(DamageModifierSystem.new(event_bus))
 
 	# skills
 	add_child(BowAttackSystem.new(event_bus))

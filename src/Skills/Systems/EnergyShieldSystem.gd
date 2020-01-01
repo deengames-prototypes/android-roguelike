@@ -16,7 +16,7 @@ func activate(entity):
 		shield.strength = Constants.ENERGY_SHIELD_STRENGTH
 	else:
 		shield = EnergyShieldEffect.new(status_effects_component, Constants.ENERGY_SHIELD_STRENGTH)
-		effects.add(shield)
+		effects.append(shield)
 
 func _get_shield(effects):
 	for e in effects:
