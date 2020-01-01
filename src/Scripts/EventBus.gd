@@ -18,3 +18,4 @@ signal activate_tile(tile)
 
 # skills
 signal bow_attack(source_entity, target)
+signal energy_shield(entity)
