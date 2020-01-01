@@ -14,9 +14,11 @@ const TargetedSkillSystem = preload("res://Ecs/Systems/TargetedSkillSystem.gd")
 const SetPlayerSystem = preload("res://Ecs/Systems/SetPlayerSystem.gd")
 const ActivateTileSystem = preload("res://Ecs/Systems/ActivateTileSystem.gd")
 const PlayerSwitchSystem = preload("res://Ecs/Systems/PlayerSwitchSystem.gd")
+const SelfSkillSystem = preload("res://Ecs/Systems/SelfSkillSystem.gd")
 
 # skill systems
 const BowAttackSystem = preload("res://Skills/Systems/BowAttackSystem.gd")
+const EnergyShieldSystem = preload("res://Skills/Systems/EnergyShieldSystem.gd")
 
 func add_entity(e):
 	for system in get_children():
@@ -57,6 +59,8 @@ func _setup_systems(ground_tilemap, creatures_tilemap, camera, event_bus):
 	add_child(SetPlayerSystem.new(event_bus))
 	add_child(ActivateTileSystem.new(event_bus, creatures_tilemap))
 	add_child(PlayerSwitchSystem.new(event_bus))
+	add_child(SelfSkillSystem.new(event_bus))
 
 	# skills
 	add_child(BowAttackSystem.new(event_bus))
+	add_child(EnergyShieldSystem.new(event_bus))
