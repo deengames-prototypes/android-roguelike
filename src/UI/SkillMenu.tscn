@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/skillframe.png" type="Texture" id=1]
-[ext_resource path="res://Assets/skills/bowattack.png" type="Texture" id=2]
+[ext_resource path="res://Assets/skills/bowattack.png" type="Texture" id=1]
 
 [node name="SkillMenu" type="Node2D"]
 
@@ -11,7 +10,3 @@ normal = ExtResource( 1 )
 shape_centered = false
 action = "skill_1"
 visibility_mode = 1
-
-[node name="Sprite" type="Sprite" parent="Skill1"]
-texture = ExtResource( 2 )
-centered = false
