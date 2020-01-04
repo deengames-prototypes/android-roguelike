@@ -2,9 +2,13 @@ extends "res://Ecs/Core/System.gd"
 
 const EnergyShieldEffect = preload("res://Effects/Damage/EnergyShieldEffect.gd")
 
+var _player
+
 func _init(event_bus):
 	required_component_types = ["StatusEffectsComponent"]
 	event_bus.connect("energy_shield", self, 'activate')
+	event_bus.connect("end_turn", self, "on_end_turn")
+	event_bus.connect("set_player", self, "on_set_player")
 
 func activate(entity):
 	var status_effects_component = entity.get("StatusEffectsComponent")
@@ -14,9 +18,25 @@ func activate(entity):
 	var shield = _get_shield(effects)
 	if shield != null:
 		shield.strength = Constants.ENERGY_SHIELD_STRENGTH
+		shield.turns_passed = 0
 	else:
 		shield = EnergyShieldEffect.new(status_effects_component, Constants.ENERGY_SHIELD_STRENGTH)
 		effects.append(shield)
+
+func on_end_turn():
+	if not _player.has("StatusEffectsComponent"):
+		return
+
+	var shield = _get_shield(_player.get("StatusEffectsComponent").effects)
+	if shield == null:
+		return
+
+	shield.turns_passed += 1
+	if shield.turns_passed >= 20 and Constants.SHIELD_DIES_AFTER_20_STEPS:
+		shield._end_effect()
+
+func on_set_player(player):
+	_player = player
 
 func _get_shield(effects):
 	for e in effects:
