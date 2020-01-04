@@ -6,3 +6,4 @@ enum TYPES { TARGETED, SELF }
 var cost: int
 var type
 var signal_name: String
+var icon: Texture

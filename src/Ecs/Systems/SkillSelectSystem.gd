@@ -14,6 +14,6 @@ func _process(delta):
 			var hotkey_index = skill_hotkeys.find(hotkey)
 			for entity in self.entities:
 				var skill_component = entity.get("SkillComponent")
-				if hotkey_index <= len(skill_component.skills):
+				if hotkey_index < len(skill_component.skills):
 					skill_component.active = skill_component.skills[hotkey_index]
 					_event_bus.emit_signal("switched_skill", entity, skill_component.active)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bowattack.png-03a3e94ff15349160cef6250a0761ff3.stex"
+path="res://.import/energyshield.png-839258bf8bd017a79b1ec18a83143853.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/skills/raw/bowattack.png"
-dest_files=[ "res://.import/bowattack.png-03a3e94ff15349160cef6250a0761ff3.stex" ]
+source_file="res://Assets/skills/energyshield.png"
+dest_files=[ "res://.import/energyshield.png-839258bf8bd017a79b1ec18a83143853.stex" ]
 
 [params]
 
