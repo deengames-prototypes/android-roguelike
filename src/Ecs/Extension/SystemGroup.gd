@@ -17,6 +17,7 @@ const PlayerSwitchSystem = preload("res://Ecs/Systems/PlayerSwitchSystem.gd")
 const SelfSkillSystem = preload("res://Ecs/Systems/SelfSkillSystem.gd")
 const EffectsDisplaySystem = preload("res://Ecs/Systems/EffectsDisplaySystem.gd")
 const DamageModifierSystem = preload("res://Ecs/Systems/DamageModifierSystem.gd")
+const SkillMenuSystem = preload("res://Ecs/Systems/SkillMenuSystem.gd")
 
 # skill systems
 const BowAttackSystem = preload("res://Skills/Systems/BowAttackSystem.gd")
@@ -34,9 +35,9 @@ func change_entity(e):
 	remove_entity(e)
 	add_entity(e)
 
-func _setup(ground_tilemap, creatures_tilemap, effects_tilemap, camera, event_bus):
+func _setup(ground_tilemap, creatures_tilemap, effects_tilemap, camera, ui, event_bus):
 	_setup_tilemaps(ground_tilemap, creatures_tilemap, effects_tilemap)
-	_setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, event_bus)
+	_setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, ui, event_bus)
 	event_bus.connect("spawn_entity", self, "add_entity")
 	event_bus.connect("change_entity", self, "change_entity")
 	event_bus.connect("entity_died", self, "remove_entity")
@@ -47,7 +48,7 @@ func _setup_tilemaps(ground_tilemap, creatures_tilemap, effects_tilemap):
 	creatures_tilemap.cell_size = cell_size
 	effects_tilemap.cell_size = cell_size
 
-func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, event_bus):
+func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, ui, event_bus):
 	add_child(DisplaySystem.new(event_bus, ground_tilemap, creatures_tilemap))
 	add_child(FovSystem.new(event_bus))
 	add_child(PlayerMovementSystem.new(event_bus))
@@ -65,6 +66,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(SelfSkillSystem.new(event_bus))
 	add_child(EffectsDisplaySystem.new(effects_tilemap))
 	add_child(DamageModifierSystem.new(event_bus))
+	add_child(SkillMenuSystem.new(ui, event_bus))
 
 	# skills
 	add_child(BowAttackSystem.new(event_bus))
