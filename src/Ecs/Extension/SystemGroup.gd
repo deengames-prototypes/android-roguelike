@@ -18,9 +18,10 @@ const SelfSkillSystem = preload("res://Ecs/Systems/SelfSkillSystem.gd")
 const EffectsDisplaySystem = preload("res://Ecs/Systems/EffectsDisplaySystem.gd")
 const DamageModifierSystem = preload("res://Ecs/Systems/DamageModifierSystem.gd")
 const SkillMenuSystem = preload("res://Ecs/Systems/SkillMenuSystem.gd")
+const StunSystem = preload("res://Ecs/Systems/StunSystem.gd")
 
 # skill systems
-const BowAttackSystem = preload("res://Skills/Systems/BowAttackSystem.gd")
+const StunPistolSystem = preload("res://Skills/Systems/StunPistolSystem.gd")
 const EnergyShieldSystem = preload("res://Skills/Systems/EnergyShieldSystem.gd")
 
 func add_entity(e):
@@ -67,7 +68,8 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(EffectsDisplaySystem.new(effects_tilemap))
 	add_child(DamageModifierSystem.new(event_bus))
 	add_child(SkillMenuSystem.new(ui, event_bus))
+	add_child(StunSystem.new(event_bus))
 
 	# skills
-	add_child(BowAttackSystem.new(event_bus))
+	add_child(StunPistolSystem.new(event_bus))
 	add_child(EnergyShieldSystem.new(event_bus))

@@ -11,7 +11,7 @@ const SkillComponent = preload("res://Ecs/Components/SkillComponent.gd")
 const PlayableComponent = preload("res://Ecs/Components/PlayableComponent.gd")
 const StatusEffectsComponent = preload("res://Ecs/Components/StatusEffectsComponent.gd")
 
-const BowAttack = preload("res://Skills/Components/BowAttack.gd")
+const StunPistol = preload("res://Skills/Components/StunPistol.gd")
 const EnergyShield = preload("res://Skills/Components/EnergyShield.gd")
 
 func create_player(x, y):
@@ -23,7 +23,7 @@ func create_player(x, y):
 		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
 		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
-		.add("SkillComponent", SkillComponent.new([BowAttack.new()])) \
+		.add("SkillComponent", SkillComponent.new([StunPistol.new()])) \
 		.add("StatusEffectsComponent", StatusEffectsComponent.new())
 
 func create_sister(x, y):
@@ -33,7 +33,7 @@ func create_sister(x, y):
 		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
 		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
-		.add("SkillComponent", SkillComponent.new([BowAttack.new(), EnergyShield.new()])) \
+		.add("SkillComponent", SkillComponent.new([EnergyShield.new()])) \
 		.add("StatusEffectsComponent", StatusEffectsComponent.new())
 
 func create_monster(x, y):
