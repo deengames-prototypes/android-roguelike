@@ -17,6 +17,8 @@ func on_turn_end():
 		return
 	
 	for entity in entities:
+		if entity.has("StunnedComponent"):
+			continue
 		# Move only if player is in monster FOV.
 		# Expensive but accurate, assumes few monsters and done once per turn.
 		# If this is too expensive, switch to manhattan distance (no sqrt)
