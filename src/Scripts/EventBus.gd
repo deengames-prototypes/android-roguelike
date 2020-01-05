@@ -18,6 +18,9 @@ signal add_healthbar(healthbar)
 signal remove_healthbar(healthbar)
 signal activate_tile(tile)
 
+signal create_explosion(target, damage, radius)
+
 # skills
 signal stun_pistol(source_entity, target)
+signal rocket_launcher(source_entity, target)
 signal energy_shield(entity)
