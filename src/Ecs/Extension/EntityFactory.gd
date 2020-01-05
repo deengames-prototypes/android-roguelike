@@ -12,6 +12,7 @@ const PlayableComponent = preload("res://Ecs/Components/PlayableComponent.gd")
 const StatusEffectsComponent = preload("res://Ecs/Components/StatusEffectsComponent.gd")
 
 const StunPistol = preload("res://Skills/Components/StunPistol.gd")
+const RocketLauncher = preload("res://Skills/Components/RocketLauncher.gd")
 const EnergyShield = preload("res://Skills/Components/EnergyShield.gd")
 
 func create_player(x, y):
@@ -23,7 +24,7 @@ func create_player(x, y):
 		.add("MeleeComponent", MeleeComponent.new(Constants.PLAYER_ATTACK_DAMAGE)) \
 		.add("HealthComponent", HealthComponent.new(Constants.PLAYER_MAX_HEALTH)) \
 		.add("SightComponent", SightComponent.new(Constants.PLAYER_SIGHT)) \
-		.add("SkillComponent", SkillComponent.new([StunPistol.new()])) \
+		.add("SkillComponent", SkillComponent.new([StunPistol.new(), RocketLauncher.new()])) \
 		.add("StatusEffectsComponent", StatusEffectsComponent.new())
 
 func create_sister(x, y):

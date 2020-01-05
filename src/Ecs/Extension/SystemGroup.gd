@@ -22,6 +22,7 @@ const StunSystem = preload("res://Ecs/Systems/StunSystem.gd")
 
 # skill systems
 const StunPistolSystem = preload("res://Skills/Systems/StunPistolSystem.gd")
+const RocketLauncherSystem = preload("res://Skills/Systems/RocketLauncherSystem.gd")
 const EnergyShieldSystem = preload("res://Skills/Systems/EnergyShieldSystem.gd")
 
 func add_entity(e):
@@ -69,6 +70,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(DamageModifierSystem.new(event_bus))
 	add_child(SkillMenuSystem.new(ui, event_bus))
 	add_child(StunSystem.new(event_bus))
+	add_child(RocketLauncherSystem.new(event_bus))
 
 	# skills
 	add_child(StunPistolSystem.new(event_bus))
