@@ -17,7 +17,6 @@ func _lightning_cannon(source, target, damage, radius):
 	if damage <= 0 or radius <= 0:
 		return
 	
-	print("cannon: " + str(damage) + ", " + str(radius))
 	_event_bus.emit_signal("damage_entity", target, damage)
 	var target_2 = _get_entity_within_radius(target.position, radius)
 	if target_2 != null and target_2 != target and source != target_2:
