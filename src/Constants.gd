@@ -1,10 +1,5 @@
 extends Node
 
-# A list of feature toggles. Setting a value of "true" turns a feature
-# on, and setting a value of "false" turns a feature off.
-const SHIELD_DIES_AFTER_3_HITS = true
-const SHIELD_DIES_AFTER_20_STEPS = true
-
 # extract into a config.json file? godot's ConfigFile?
 const TILES_WIDE = 60
 const TILES_HIGH = 34
@@ -27,7 +22,8 @@ const ROCKET_EXPLOSION_RADIUS = 2
 const LIGHTNING_CANNON_DAMAGE = 4
 const LIGHTNING_CANNON_RADIUS = 3
 
-const ENERGY_SHIELD_STRENGTH = 3
+const ENERGY_SHIELD_STRENGTH = 3  # -1 == infinite strength
+const ENERGY_SHIELD_TURNS = 20  # -1 == infinite turns
 
 const MIN_ENEMIES_PER_DUNGEON = 8
 const MAX_ENEMIES_PER_DUNGEON = 16

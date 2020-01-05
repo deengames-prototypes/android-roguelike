@@ -18,9 +18,9 @@ func activate(entity):
 	var shield = _get_shield(effects)
 	if shield != null:
 		shield.strength = Constants.ENERGY_SHIELD_STRENGTH
-		shield.turns_passed = 0
+		shield.turns_left = Constants.ENERGY_SHIELD_TURNS
 	else:
-		shield = EnergyShieldEffect.new(status_effects_component, Constants.ENERGY_SHIELD_STRENGTH)
+		shield = EnergyShieldEffect.new(status_effects_component, Constants.ENERGY_SHIELD_STRENGTH, Constants.ENERGY_SHIELD_TURNS)
 		effects.append(shield)
 
 func on_end_turn():
@@ -31,8 +31,8 @@ func on_end_turn():
 	if shield == null:
 		return
 
-	shield.turns_passed += 1
-	if shield.turns_passed >= 20 and Constants.SHIELD_DIES_AFTER_20_STEPS:
+	shield.turns_left -= 1
+	if shield.turns_left == 0:
 		shield._end_effect()
 
 func on_set_player(player):
