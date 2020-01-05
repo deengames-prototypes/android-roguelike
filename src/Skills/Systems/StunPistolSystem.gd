@@ -5,16 +5,14 @@ var _event_bus
 func _init(event_bus):
 	required_component_types = ["HealthComponent"]
 	_event_bus = event_bus
-	_event_bus.connect("bow_attack", self, 'activate')
+	_event_bus.connect("stun_pistol", self, 'activate')
 
 func activate(source_entity, target: Vector2):
 	# TODO: ensure line of sight
 	var target_entity = _get_entity_at(target)
 	if target_entity != null and source_entity != target_entity:
-		var damage = Constants.BOW_BASE_DAMAGE
-		var distance = int(source_entity.position.distance_to(target)) - 1
-		damage -= Constants.BOW_DAMAGE_LOSS_PER_DISTANCE_UNIT * distance
-		_event_bus.emit_signal("damage_entity", target_entity, damage)
+		_event_bus.emit_signal("stun_entity", target_entity, Constants.PISTOL_TURNS_STUNNED)
+		_event_bus.emit_signal("damage_entity", target_entity, Constants.PISTOL_DAMAGE)
 		_event_bus.emit_signal("end_turn")
 
 func _get_entity_at(position):

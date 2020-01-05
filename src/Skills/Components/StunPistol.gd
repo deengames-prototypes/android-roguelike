@@ -2,5 +2,5 @@ extends "res://Skills/Core/Skill.gd"
 
 func _init():
 	type = TYPES.TARGETED
-	signal_name = "bow_attack"
+	signal_name = "stun_pistol"
 	icon = preload("res://Assets/skills/bowattack.png")
