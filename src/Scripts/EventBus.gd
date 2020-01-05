@@ -23,4 +23,5 @@ signal create_explosion(target, damage, radius)
 # skills
 signal stun_pistol(source_entity, target)
 signal rocket_launcher(source_entity, target)
+signal lightning_cannon(source_entity, target)
 signal energy_shield(entity)

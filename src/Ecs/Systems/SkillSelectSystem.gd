@@ -1,7 +1,7 @@
 extends "res://Ecs/Core/System.gd"
 
 # n-th hotkey = n-th skill
-var skill_hotkeys = ['1', '2']
+var skill_hotkeys = ['1', '2', '3']
 var _event_bus
 
 func _init(event_bus):
