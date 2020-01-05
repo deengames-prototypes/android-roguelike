@@ -8,6 +8,7 @@ func _init(event_bus):
 	_event_bus.connect("create_explosion", self, "on_create_explosion")
 
 func on_create_explosion(target_tile, base_damage, radius):
+	# TODO: observe line of sight
 	for e in entities:
 		var distance = e.position.distance_to(target_tile)
 		if distance <= radius:
