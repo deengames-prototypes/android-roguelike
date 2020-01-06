@@ -1,47 +1,35 @@
 extends "res://Ecs/Core/System.gd"
 
 var _event_bus
-var _player = null
+var _tilemap
+var fov_map = {}  # playable_entity: fov
 
-func _init(event_bus):
+var fov_lib = preload("res://Scripts/fov.gd").new()
+
+func _init(event_bus, ground_tilemap):
 	_event_bus = event_bus
+	_tilemap = ground_tilemap
 
 	_event_bus.connect("move_entity", self, "on_move_entity")
-	_event_bus.connect("set_player", self, "on_set_player")
+	_event_bus.connect("spawn_entity", self, "on_move_entity")
 
-func on_set_player(player):
-	_player = player
-	update_player_fov(_player.position)
-
-func on_move_entity(entity, new_position):
-	if _player != null and entity == _player and _is_empty(new_position):
-		update_player_fov(new_position)
-
-func update_player_fov(pos):
-	_event_bus.emit_signal("fov_change", calculate_fov_from(pos, _player.get("SightComponent").sight_radius))
+func on_move_entity(entity, new_position=null):
+	if new_position == null or not _is_empty(new_position):
+		new_position = entity.position
+	
+	if entity.has("PlayableComponent") and entity.has("SightComponent"):
+		fov_map[entity] = calculate_fov_from(new_position, entity.get("SightComponent").sight_radius)
+		_event_bus.emit_signal("fov_change", get_total_fov())
 
 func calculate_fov_from(pos, radius):
-	# what really should be used here is a set
-	# though that has no equivalent in gdscript
-	# so a dictionary with nonsensical values will have to do
-	var fov = {} # Vector2(x, y) => true
-	for y in range(Constants.TILES_HIGH):
-		for x in range(Constants.TILES_WIDE):
-			var tile = Vector2(x, y)
-			if _is_in_fov(pos, radius, tile):
-				fov[tile] = true
-	
-	return fov
+	return fov_lib.do_fov(_tilemap, pos, radius)
 
-func _is_in_fov(pos, radius, tile):
-	if tile.x < pos.x - radius or \
-		tile.y < pos.y - radius or \
-		tile.x > pos.x + radius or \
-		tile.y > pos.y + radius:
-			
-		return false
-		
-	return pos.distance_to(tile) <= radius
+func get_total_fov():
+	var total_fov = {}
+	for fov in fov_map.values():
+		for tile in fov:
+			total_fov[tile] = true
+	return total_fov
 
 func _is_empty(pos):
 	for e in entities:

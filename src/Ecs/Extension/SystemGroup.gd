@@ -55,7 +55,7 @@ func _setup_tilemaps(ground_tilemap, creatures_tilemap, effects_tilemap):
 
 func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, ui, event_bus):
 	add_child(DisplaySystem.new(event_bus, ground_tilemap, creatures_tilemap))
-	add_child(FovSystem.new(event_bus))
+	add_child(FovSystem.new(event_bus, ground_tilemap))
 	add_child(PlayerMovementSystem.new(event_bus))
 	add_child(EntityMovementSystem.new(event_bus))
 	add_child(CameraSystem.new(camera))
@@ -64,7 +64,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(HealthBarSystem.new(event_bus))
 	add_child(DamageSystem.new(event_bus))
 	add_child(SkillSelectSystem.new(event_bus))
-	add_child(TargetedSkillSystem.new(event_bus))
+	add_child(TargetedSkillSystem.new(event_bus, ground_tilemap))
 	add_child(SetPlayerSystem.new(event_bus))
 	add_child(ActivateTileSystem.new(event_bus, creatures_tilemap))
 	add_child(PlayerSwitchSystem.new(event_bus))
@@ -79,5 +79,5 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	# skills
 	add_child(StunPistolSystem.new(event_bus))
 	add_child(RocketLauncherSystem.new(event_bus))
-	add_child(LightningCannonSystem.new(event_bus))
+	add_child(LightningCannonSystem.new(event_bus, ground_tilemap))
 	add_child(EnergyShieldSystem.new(event_bus))
