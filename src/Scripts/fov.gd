@@ -11,12 +11,10 @@ const MULT = [
 	[1,  0,  0,  1, -1,  0,  0, -1]
 ]
 
-const BLOCKED_INDEXES = [1, 4]
-
 func blocked(tilemap, x, y):
 	return (x < 0 or y < 0 \
 			or x >= Constants.TILES_WIDE or y >= Constants.TILES_HIGH \
-			or tilemap.get_cell(x, y) in BLOCKED_INDEXES)
+			or tilemap.get_cell(x, y) in Constants.BLOCKED_INDEXES)
 
 func set_lit(fov, x, y):
 	if x >= 0 and x < Constants.TILES_WIDE and y >= 0 and y < Constants.TILES_HIGH:
