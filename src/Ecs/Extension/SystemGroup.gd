@@ -63,7 +63,7 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(HealthBarSystem.new(event_bus))
 	add_child(DamageSystem.new(event_bus))
 	add_child(SkillSelectSystem.new(event_bus))
-	add_child(TargetedSkillSystem.new(event_bus))
+	add_child(TargetedSkillSystem.new(event_bus, ground_tilemap))
 	add_child(SetPlayerSystem.new(event_bus))
 	add_child(ActivateTileSystem.new(event_bus, creatures_tilemap))
 	add_child(PlayerSwitchSystem.new(event_bus))
@@ -72,10 +72,10 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(DamageModifierSystem.new(event_bus))
 	add_child(SkillMenuSystem.new(ui, event_bus))
 	add_child(StunSystem.new(event_bus))
-	add_child(ExplosionSystem.new(event_bus))
+	add_child(ExplosionSystem.new(event_bus, ground_tilemap))
 
 	# skills
 	add_child(StunPistolSystem.new(event_bus))
 	add_child(RocketLauncherSystem.new(event_bus))
-	add_child(LightningCannonSystem.new(event_bus))
+	add_child(LightningCannonSystem.new(event_bus, ground_tilemap))
 	add_child(EnergyShieldSystem.new(event_bus))
