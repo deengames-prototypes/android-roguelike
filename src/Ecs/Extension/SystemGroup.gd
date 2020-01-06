@@ -20,6 +20,7 @@ const DamageModifierSystem = preload("res://Ecs/Systems/DamageModifierSystem.gd"
 const SkillMenuSystem = preload("res://Ecs/Systems/SkillMenuSystem.gd")
 const StunSystem = preload("res://Ecs/Systems/StunSystem.gd")
 const ExplosionSystem = preload("res://Ecs/Systems/ExplosionSystem.gd")
+const StatusEffectsSystem = preload("res://Ecs/Systems/StatusEffectsSystem.gd")
 
 # skill systems
 const StunPistolSystem = preload("res://Skills/Systems/StunPistolSystem.gd")
@@ -72,7 +73,8 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(DamageModifierSystem.new(event_bus))
 	add_child(SkillMenuSystem.new(ui, event_bus))
 	add_child(StunSystem.new(event_bus))
-	add_child(ExplosionSystem.new(event_bus, ground_tilemap))
+	add_child(ExplosionSystem.new(event_bus))
+	add_child(StatusEffectsSystem.new(event_bus))
 
 	# skills
 	add_child(StunPistolSystem.new(event_bus))

@@ -15,3 +15,8 @@ func process_damage(damage):
     if strength == 0:
         _end_effect()
     return 0
+
+func on_end_turn():
+    turns_left -= 1
+    if turns_left == 0:
+        _end_effect()

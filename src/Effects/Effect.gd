@@ -14,3 +14,6 @@ func _end_effect():
 
 func process_damage(damage):
     return damage
+
+func on_end_turn():
+    pass
