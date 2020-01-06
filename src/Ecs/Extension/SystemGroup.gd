@@ -54,7 +54,7 @@ func _setup_tilemaps(ground_tilemap, creatures_tilemap, effects_tilemap):
 
 func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, ui, event_bus):
 	add_child(DisplaySystem.new(event_bus, ground_tilemap, creatures_tilemap))
-	add_child(FovSystem.new(event_bus))
+	add_child(FovSystem.new(event_bus, ground_tilemap))
 	add_child(PlayerMovementSystem.new(event_bus))
 	add_child(EntityMovementSystem.new(event_bus))
 	add_child(CameraSystem.new(camera))
