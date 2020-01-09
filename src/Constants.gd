@@ -27,6 +27,8 @@ const LIGHTNING_CANNON_RADIUS = 3
 const ENERGY_SHIELD_STRENGTH = 3  # -1 == infinite strength
 const ENERGY_SHIELD_TURNS = 20  # -1 == infinite turns
 
+const HEAL_SELF_AMOUNT = 4
+
 const MIN_ENEMIES_PER_DUNGEON = 8
 const MAX_ENEMIES_PER_DUNGEON = 16
 const MONSTER_SIGHT = 3
