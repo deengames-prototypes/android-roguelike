@@ -21,12 +21,14 @@ const SkillMenuSystem = preload("res://Ecs/Systems/SkillMenuSystem.gd")
 const StunSystem = preload("res://Ecs/Systems/StunSystem.gd")
 const ExplosionSystem = preload("res://Ecs/Systems/ExplosionSystem.gd")
 const StatusEffectsSystem = preload("res://Ecs/Systems/StatusEffectsSystem.gd")
+const HealSystem = preload("res://Ecs/Systems/HealSystem.gd")
 
 # skill systems
 const StunPistolSystem = preload("res://Skills/Systems/StunPistolSystem.gd")
 const RocketLauncherSystem = preload("res://Skills/Systems/RocketLauncherSystem.gd")
 const LightningCannonSystem = preload("res://Skills/Systems/LightningCannonSystem.gd")
 const EnergyShieldSystem = preload("res://Skills/Systems/EnergyShieldSystem.gd")
+const HealSelfSystem = preload("res://Skills/Systems/HealSelfSystem.gd")
 
 func add_entity(e):
 	for system in get_children():
@@ -73,11 +75,13 @@ func _setup_systems(ground_tilemap, creatures_tilemap, effects_tilemap, camera, 
 	add_child(DamageModifierSystem.new(event_bus))
 	add_child(SkillMenuSystem.new(ui, event_bus))
 	add_child(StunSystem.new(event_bus))
-	add_child(ExplosionSystem.new(event_bus))
+	add_child(ExplosionSystem.new(event_bus, ground_tilemap))
 	add_child(StatusEffectsSystem.new(event_bus))
+	add_child(HealSystem.new(event_bus))
 
 	# skills
 	add_child(StunPistolSystem.new(event_bus))
 	add_child(RocketLauncherSystem.new(event_bus))
 	add_child(LightningCannonSystem.new(event_bus, ground_tilemap))
 	add_child(EnergyShieldSystem.new(event_bus))
+	add_child(HealSelfSystem.new(event_bus))
